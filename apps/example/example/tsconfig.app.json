@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../../../dist/out-tsc/apps/example/examples",
+    "types": []
+  },
+  "exclude": ["src/test.ts", "**/*.spec.ts"],
+  "include": [
+    "**/*.ts",
+    "../../../libs/polling/feature-shell/src/index.ts"
+  ]
+}

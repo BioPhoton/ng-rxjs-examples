@@ -7,5 +7,12 @@
     "tslint.json": "*",
     "nx.json": "*"
   },
-  "projects": {}
+  "projects": {
+    "example-example": {
+      "tags": ["type:app"]
+    },
+    "polling-feature-shell": {
+      "tags": ["scope:polling", "type:feature"]
+    }
+  }
 }

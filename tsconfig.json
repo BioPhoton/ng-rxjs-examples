@@ -14,7 +14,14 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@@rxjs-examples/polling/feature-shell": [
+        "libs/polling/feature-shell/src/index.ts"
+      ],
+      "@@rxjs-examples/polling/feature-simple": [
+        "libs/polling/feature-simple/src/index.ts"
+      ]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
