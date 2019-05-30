@@ -102,6 +102,68 @@
           "styleext": "scss"
         }
       }
+    },
+    "operating-heavily-dynamic-uis-feature-shell": {
+      "root": "libs/operating-heavily-dynamic-uis/feature-shell",
+      "sourceRoot": "libs/operating-heavily-dynamic-uis/feature-shell/src",
+      "projectType": "library",
+      "prefix": "ohdui",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/operating-heavily-dynamic-uis/feature-shell/tsconfig.lib.json",
+              "libs/operating-heavily-dynamic-uis/feature-shell/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/operating-heavily-dynamic-uis/feature-shell/src/test.ts",
+            "tsConfig": "libs/operating-heavily-dynamic-uis/feature-shell/tsconfig.spec.json",
+            "karmaConfig": "libs/operating-heavily-dynamic-uis/feature-shell/karma.conf.js"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/schematics:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "shared-core": {
+      "root": "libs/shared/core",
+      "sourceRoot": "libs/shared/core/src",
+      "projectType": "library",
+      "prefix": "c",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/shared/core/tsconfig.lib.json",
+              "libs/shared/core/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/shared/core/src/test.ts",
+            "tsConfig": "libs/shared/core/tsconfig.spec.json",
+            "karmaConfig": "libs/shared/core/karma.conf.js"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/schematics:component": {
+          "styleext": "scss"
+        }
+      }
     }
   },
   "cli": {

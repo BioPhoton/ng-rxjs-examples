@@ -19,6 +19,11 @@ import { RouterModule } from '@angular/router';
           path: 'polling',
           loadChildren:
             '@@rxjs-examples/polling/feature-shell#PollingFeatureShellModule'
+        },
+        {
+          path: 'interactive-uis',
+          loadChildren:
+            '@@rxjs-examples/operating-heavily-dynamic-uis/feature-shell#OperatingHeavilyDynamicUisFeatureShellModule'
         }
       ],
       {

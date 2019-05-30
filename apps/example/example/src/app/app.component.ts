@@ -6,25 +6,9 @@ import { takeUntil } from 'rxjs/operators';
   selector: 'exp-root',
   templateUrl: './app.component.html'
 })
-export class AppComponent implements OnDestroy {
-
-  private ngOnDestroySub = new Subject();
-  public ngOnDestroy$ = this.ngOnDestroySub.asObservable();
+export class AppComponent {
 
   constructor() {
-    interval()
-      .pipe(
-        takeUntil(this.ngOnDestroy$)
-      )
-      .subscribe(
-        (n) => {
-          console.log('hallo', n);
-        }
-      );
-  }
-
-  ngOnDestroy(): void {
-    this.ngOnDestroySub.next('something');
   }
 
 }

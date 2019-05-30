@@ -13,6 +13,12 @@
     },
     "polling-feature-shell": {
       "tags": ["scope:polling", "type:feature"]
+    },
+    "operating-heavily-dynamic-uis-feature-shell": {
+      "tags": ["type:feature"]
+    },
+    "shared-core": {
+      "tags": ["scope:lib"]
     }
   }
 }

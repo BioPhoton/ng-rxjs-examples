@@ -1,0 +1,22 @@
+<h1>
+  counter-container works!
+</h1>
+
+<pre>
+  {{counterState$ | async | json}}
+</pre>
+
+<ohdui-counter
+  [state]="counterState$ | async"
+
+  (btnStart)="btnStart.next($event)"
+  (btnPause)="btnPause.next($event)"
+  (btnSetTo)="btnSetTo.next($event)"
+  (btnUp)="btnUp.next($event)"
+  (btnDown)="btnDown.next($event)"
+  (btnReset)="btnReset.next($event)"
+  (inputSetTo)="inputSetTo.next(getInputValue($event))"
+  (inputTickSpeed)="inputTickSpeed.next(getInputValue($event))"
+  (inputCountDiff)="inputCountDiff.next(getInputValue($event))"
+>
+</ohdui-counter>
