@@ -5,7 +5,7 @@ import {
   CounterState,
   PartialCountDownState
 } from '../counter-state.interface';
-import { initialCounterState } from './initial-counter-state';
+import { initialCounterState } from '../initial-counter-state';
 
 @Component({
   selector: 'ohdui-counter-container',
