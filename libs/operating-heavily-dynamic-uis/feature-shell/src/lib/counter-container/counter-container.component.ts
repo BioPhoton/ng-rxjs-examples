@@ -6,12 +6,15 @@ import {
   PartialCountDownState
 } from '../counter-state.interface';
 import { initialCounterState } from '../initial-counter-state';
+import { getInputValue } from '../utils';
 
 @Component({
   selector: 'ohdui-counter-container',
   templateUrl: './counter-container.component.html'
 })
 export class CounterContainerComponent {
+
+  getInputValue = getInputValue;
 
   // = BASE OBSERVABLES  ====================================================
   // == SOURCE OBSERVABLES ==================================================
@@ -56,5 +59,6 @@ export class CounterContainerComponent {
 
   constructor() {
   }
+
 
 }

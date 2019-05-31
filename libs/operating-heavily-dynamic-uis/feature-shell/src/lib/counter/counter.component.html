@@ -43,7 +43,7 @@
 <input
   id="{{elementIds.InputSetTo}}"
   type="number" min=0
-  value=""
+  value="{{initialSetToValue$ |async}}"
   (input)="inputSetTo.next($event)"/>
 
 <button type="button"
