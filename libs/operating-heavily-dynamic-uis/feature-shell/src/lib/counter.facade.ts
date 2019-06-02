@@ -90,7 +90,7 @@ export class CounterFacade {
       })
     );
 
-  constructor(public counterService: CounterStateService) {
+  constructor() {
   }
 
 }
