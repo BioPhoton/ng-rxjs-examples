@@ -2,13 +2,12 @@ import {
   ChangeDetectionStrategy,
   Component,
   Input,
-  OnInit,
-  Output
+  Output, ViewChild
 } from '@angular/core';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { Observable, ReplaySubject, Subject } from 'rxjs';
 import { first, map, tap } from 'rxjs/operators';
-import { CounterState } from '../counter-state.interface';
-import { ElementIds } from '../element-id.enum';
+import { CounterState } from '../utils/counter-state.interface';
+import { ElementIds } from '../utils/element-id.enum';
 
 @Component({
   selector: 'ohdui-counter',
@@ -17,51 +16,40 @@ import { ElementIds } from '../element-id.enum';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CounterComponent {
-  public elementIds = ElementIds;
+  elementIds = ElementIds;
 
-  private stateSubject: BehaviorSubject<CounterState> = new BehaviorSubject<CounterState>(null);
-  public state$: Observable<CounterState> = this.stateSubject.asObservable();
-
-  @Output()
-  public btnStart: Subject<Event> = new Subject<Event>();
+  private stateSubject: ReplaySubject<CounterState> = new ReplaySubject<CounterState>(1);
+  state$ = this.stateSubject.asObservable();
 
   @Output()
-  public btnPause: Subject<Event> = new Subject<Event>();
-
+  btnStart: Subject<Event> = new Subject<Event>();
   @Output()
-  public btnUp: Subject<Event> = new Subject<Event>();
-
+  btnPause: Subject<Event> = new Subject<Event>();
   @Output()
-  public btnDown: Subject<Event> = new Subject<Event>();
-
+  btnUp: Subject<Event> = new Subject<Event>();
   @Output()
-  public btnReset: Subject<Event> = new Subject<Event>();
-
+  btnDown: Subject<Event> = new Subject<Event>();
   @Output()
-  public btnSetTo: Subject<Event> = new Subject<Event>();
-
+  btnReset: Subject<Event> = new Subject<Event>();
   @Output()
-  public inputTickSpeed: Subject<Event> = new Subject<Event>();
-
+  btnSetTo: Subject<Event> = new Subject<Event>();
   @Output()
-  public inputCountDiff: Subject<Event> = new Subject<Event>();
-
+  inputTickSpeed: Subject<Event> = new Subject<Event>();
   @Output()
-  public inputSetTo: Subject<Event> = new Subject<Event>();
+  inputCountDiff: Subject<Event> = new Subject<Event>();
+  @Output()
+  inputSetTo: Subject<Event> = new Subject<Event>();
 
   @Input()
   set state(c: CounterState) {
     this.stateSubject.next(c);
   }
 
-  public initialSetToValue$ = this.state$
+  initialSetToValue$ = this.state$
     .pipe(
       first(),
       map(s => s.count),
-      tap(console.log),
-
     );
-
 
   constructor() {
 

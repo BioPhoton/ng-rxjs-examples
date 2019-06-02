@@ -1,4 +1,4 @@
-import { CounterState } from '../counter-state.interface';
+import { CounterState } from './utils/counter-state.interface';
 
 export const initialCounterState: CounterState = {
   isTicking: false,

@@ -40,6 +40,7 @@
   (click)="btnSetTo.next($event)">
   Set To
 </button>
+
 <input
   id="{{elementIds.InputSetTo}}"
   type="number" min=0
@@ -83,4 +84,3 @@
   type="number" min=0
   value="{{(state$ | async)?.countDiff}}"
   (input)="inputCountDiff.next($event)"/>
-

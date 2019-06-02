@@ -1,22 +1,22 @@
-<h1>
-  counter-container works!
-</h1>
-
 <pre>
   {{counterState$ | async | json}}
 </pre>
 
-<ohdui-counter
-  [state]="counterState$ | async"
+<!-- Just for subscription handling-->
+<!-- Lazy trick to handle all subscriptions over the view -->
+<div style="display: none">{{facade.commandFromTick$ |async}}</div>
 
-  (btnStart)="btnStart.next($event)"
-  (btnPause)="btnPause.next($event)"
-  (btnSetTo)="btnSetTo.next($event)"
-  (btnUp)="btnUp.next($event)"
-  (btnDown)="btnDown.next($event)"
-  (btnReset)="btnReset.next($event)"
-  (inputSetTo)="inputSetTo.next(getInputValue($event))"
-  (inputTickSpeed)="inputTickSpeed.next(getInputValue($event))"
-  (inputCountDiff)="inputCountDiff.next(getInputValue($event))"
+<ohdui-counter
+  [state]="facade.counterState$ | async"
+
+  (btnStart)="facade.btnStart.next($event)"
+  (btnPause)="facade.btnPause.next($event)"
+  (btnSetTo)="facade.btnSetTo.next($event)"
+  (btnUp)="facade.btnUp.next($event)"
+  (btnDown)="facade.btnDown.next($event)"
+  (btnReset)="facade.btnReset.next($event)"
+  (inputSetTo)="facade.inputSetTo.next(getInputValue($event))"
+  (inputTickSpeed)="facade.inputTickSpeed.next(getInputValue($event))"
+  (inputCountDiff)="facade.inputCountDiff.next(getInputValue($event))"
 >
 </ohdui-counter>

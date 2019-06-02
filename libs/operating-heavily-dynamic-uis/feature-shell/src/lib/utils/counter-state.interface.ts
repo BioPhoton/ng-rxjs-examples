@@ -6,14 +6,14 @@ export interface CounterState {
   countDiff:number;
 }
 
-export type PartialCountDownState =
+export type PartialCounterState =
   { isTicking: boolean } |
   { count: number } |
   { countUp: boolean } |
   { tickSpeed: number } |
   { countDiff:number};
 
-export enum ConterStateKeys {
+export enum CounterStateKeys {
   isTicking = 'isTicking',
   count = 'count',
   countUp = 'countUp',
