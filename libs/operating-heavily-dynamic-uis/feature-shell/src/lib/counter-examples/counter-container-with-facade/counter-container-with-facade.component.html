@@ -2,7 +2,8 @@
 <!-- Lazy trick to handle all subscriptions over the view -->
 <div style="display: none">{{facade.commandFromTick$ |async}}</div>
 
-<ohdui-counter
+
+<ohdui-counter-with-facade
   [state]="facade.counterState$ | async"
 
   (btnStart)="facade.btnStart.next($event)"
@@ -15,4 +16,4 @@
   (inputTickSpeed)="facade.inputTickSpeed.next(getInputValue($event))"
   (inputCountDiff)="facade.inputCountDiff.next(getInputValue($event))"
 >
-</ohdui-counter>
+</ohdui-counter-with-facade>

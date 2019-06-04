@@ -17,14 +17,13 @@ import {
   tap,
   withLatestFrom
 } from 'rxjs/operators';
-import { CounterStateService } from './counter-state.service';
-import { initialCounterState } from './initial-counter-state';
-import { selectDistinctState } from './operators/selectDistinctState';
+import { initialCounterState } from '../initial-counter-state';
+import { selectDistinctState } from '../operators/selectDistinctState';
 import {
   CounterState,
   CounterStateKeys,
   PartialCounterState
-} from './utils/counter-state.interface';
+} from '../utils/counter-state.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -46,12 +45,15 @@ export class CounterFacade {
   inputTickSpeed: Subject<Event> = new Subject<Event>();
   inputCountDiff: Subject<Event> = new Subject<Event>();
 
-  // === STATE OBSERVABLES ==================================================
+  btnSetToWithLatestSetTo$ = this.btnSetTo.pipe(withLatestFrom(this.inputSetTo.pipe(startWith(this.initialCounterState.count)), (_, n) => n));
+
+
+// === STATE OBSERVABLES ==================================================
   programmaticCommandSubject = new Subject<PartialCounterState>();
   counterCommands$ = merge(
     this.btnStart.pipe(mapTo({ isTicking: true })),
     this.btnPause.pipe(mapTo({ isTicking: false })),
-    this.btnSetTo.pipe(withLatestFrom(this.inputSetTo, (_, n) => n), map(n => ({ count: n }))),
+    this.btnSetToWithLatestSetTo$.pipe(map(n => ({ count: n }))),
     this.btnUp.pipe(mapTo({ countUp: true })),
     this.btnDown.pipe(mapTo({ countUp: false })),
     this.btnReset.pipe(mapTo({ ...this.initialCounterState })),
@@ -80,7 +82,6 @@ export class CounterFacade {
   // == UI COMMANDS ===========================================================
   // == UI EVENTS ==========================================================
   // == BACKGROUND PROCESSES
-
   commandFromTick$ = this.intervalTick$
     .pipe(
       withLatestFrom(this.counterState$, (_, s) => s),

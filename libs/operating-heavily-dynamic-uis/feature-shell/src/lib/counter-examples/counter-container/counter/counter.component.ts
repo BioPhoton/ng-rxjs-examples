@@ -2,12 +2,12 @@ import {
   ChangeDetectionStrategy,
   Component,
   Input,
-  Output, ViewChild
+  Output
 } from '@angular/core';
-import { Observable, ReplaySubject, Subject } from 'rxjs';
-import { first, map, tap } from 'rxjs/operators';
-import { CounterState } from '../utils/counter-state.interface';
-import { ElementIds } from '../utils/element-id.enum';
+import { ReplaySubject, Subject } from 'rxjs';
+import { first, map } from 'rxjs/operators';
+import { CounterState } from '../../utils/counter-state.interface';
+import { ElementIds } from '../../utils/element-id.enum';
 
 @Component({
   selector: 'ohdui-counter',
@@ -20,6 +20,11 @@ export class CounterComponent {
 
   private stateSubject: ReplaySubject<CounterState> = new ReplaySubject<CounterState>(1);
   state$ = this.stateSubject.asObservable();
+
+  @Input()
+  set state(c: CounterState) {
+    this.stateSubject.next(c);
+  }
 
   @Output()
   btnStart: Subject<Event> = new Subject<Event>();
@@ -39,11 +44,6 @@ export class CounterComponent {
   inputCountDiff: Subject<Event> = new Subject<Event>();
   @Output()
   inputSetTo: Subject<Event> = new Subject<Event>();
-
-  @Input()
-  set state(c: CounterState) {
-    this.stateSubject.next(c);
-  }
 
   initialSetToValue$ = this.state$
     .pipe(

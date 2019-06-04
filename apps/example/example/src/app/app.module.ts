@@ -12,7 +12,7 @@ import { RouterModule } from '@angular/router';
       [
         {
           path: '',
-          redirectTo: 'polling',
+          redirectTo: 'interactive-uis',
           pathMatch: 'full'
         },
         {
