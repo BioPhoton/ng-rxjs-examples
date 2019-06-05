@@ -9,7 +9,6 @@ import { CounterFacade } from './counter.facade';
 })
 export class CounterContainerWithFacadeComponent {
 
-  readonly initialCounterState = initialCounterState;
   getInputValue = getInputValue;
 
   constructor(public facade: CounterFacade) {

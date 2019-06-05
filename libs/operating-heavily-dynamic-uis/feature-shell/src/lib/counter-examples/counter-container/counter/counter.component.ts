@@ -1,6 +1,6 @@
 import {
   ChangeDetectionStrategy,
-  Component,
+  Component, EventEmitter,
   Input,
   Output
 } from '@angular/core';
@@ -27,23 +27,23 @@ export class CounterComponent {
   }
 
   @Output()
-  btnStart = new Subject<Event>();
+  btnStart = new EventEmitter<Event>();
   @Output()
-  btnPause = new Subject<Event>();
+  btnPause = new EventEmitter<Event>();
   @Output()
-  btnUp = new Subject<Event>();
+  btnUp = new EventEmitter<Event>();
   @Output()
-  btnDown = new Subject<Event>();
+  btnDown = new EventEmitter<Event>();
   @Output()
-  btnReset = new Subject<Event>();
+  btnReset = new EventEmitter<Event>();
   @Output()
-  btnSetTo = new Subject<Event>();
+  btnSetTo = new EventEmitter<Event>();
   @Output()
-  inputTickSpeed = new Subject<Event>();
+  inputTickSpeed = new EventEmitter<Event>();
   @Output()
-  inputCountDiff = new Subject<Event>();
+  inputCountDiff = new EventEmitter<Event>();
   @Output()
-  inputSetTo = new Subject<Event>();
+  inputSetTo = new EventEmitter<Event>();
 
   initialSetToValue$ = this.state$
     .pipe(

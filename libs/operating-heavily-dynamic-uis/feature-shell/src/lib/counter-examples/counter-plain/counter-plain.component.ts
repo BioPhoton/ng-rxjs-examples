@@ -29,8 +29,13 @@ export class CounterPlainComponent {
   count$: Observable<number>;
 
   constructor() {
-
+    this.mutable();
   }
+
+  getInputValue = (event: HTMLInputElement): number => {
+    return parseInt(event['target'].value, 10);
+  }
+
 
   mutable() {
     merge(

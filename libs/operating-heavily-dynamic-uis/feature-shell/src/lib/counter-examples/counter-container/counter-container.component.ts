@@ -22,20 +22,23 @@ export class CounterContainerComponent {
 
   btnStart: Subject<Event> = new Subject<Event>();
   btnPause: Subject<Event> = new Subject<Event>();
-  btnUp: Subject<Event> = new Subject<Event>();
-  btnDown: Subject<Event> = new Subject<Event>();
-  btnReset: Subject<Event> = new Subject<Event>();
   btnSetTo: Subject<Event> = new Subject<Event>();
-  inputTickSpeed: Subject<Event> = new Subject<Event>();
-  inputCountDiff: Subject<Event> = new Subject<Event>();
   inputSetTo: Subject<Event> = new Subject<Event>();
-  setToValue$ = this.btnSetTo.pipe(withLatestFrom(this.inputSetTo, (_,v) => v));
 
-  counterState$: Observable<CounterState>;
+  counterState$: Observable<CounterState> = merge(
+    this.btnStart.pipe(mapTo(true)),
+    this.btnPause.pipe(mapTo(false)),
+  )
+    .pipe(
+      switchMap(isTicking => isTicking ? interval(this.initialCounterState.tickSpeed) : NEVER),
+      startWith({...this.initialCounterState}),
+      scan((state: CounterState) => ({...state, count: ++state.count}))
+    );
 
-  constructor() {
-    this.immutable();
-  }
+
+
+
+
 
   immutable() {
     this.counterState$ = merge(

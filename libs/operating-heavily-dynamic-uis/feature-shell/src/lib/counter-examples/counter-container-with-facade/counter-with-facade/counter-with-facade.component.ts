@@ -1,6 +1,6 @@
 import {
   ChangeDetectionStrategy,
-  Component,
+  Component, EventEmitter,
   Input,
   Output
 } from '@angular/core';
@@ -27,23 +27,23 @@ export class CounterWithFacadeComponent {
   }
 
   @Output()
-  btnStart: Subject<Event> = new Subject<Event>();
+  btnStart = new EventEmitter<Event>();
   @Output()
-  btnPause: Subject<Event> = new Subject<Event>();
+  btnPause = new EventEmitter<Event>();
   @Output()
-  btnUp: Subject<Event> = new Subject<Event>();
+  btnUp = new EventEmitter<Event>();
   @Output()
-  btnDown: Subject<Event> = new Subject<Event>();
+  btnDown = new EventEmitter<Event>();
   @Output()
-  btnReset: Subject<Event> = new Subject<Event>();
+  btnReset = new EventEmitter<Event>();
   @Output()
-  btnSetTo: Subject<Event> = new Subject<Event>();
+  btnSetTo = new EventEmitter<Event>();
   @Output()
-  inputTickSpeed: Subject<Event> = new Subject<Event>();
+  inputTickSpeed = new EventEmitter<Event>();
   @Output()
-  inputCountDiff: Subject<Event> = new Subject<Event>();
+  inputCountDiff = new EventEmitter<Event>();
   @Output()
-  inputSetTo: Subject<Event> = new Subject<Event>();
+  inputSetTo = new EventEmitter<Event>();
 
   initialSetToValue$ = this.state$
     .pipe(
