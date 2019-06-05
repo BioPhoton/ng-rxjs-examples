@@ -82,6 +82,7 @@ export class CounterFacade {
   // == UI COMMANDS ===========================================================
   // == UI EVENTS ==========================================================
   // == BACKGROUND PROCESSES
+
   commandFromTick$ = this.intervalTick$
     .pipe(
       withLatestFrom(this.counterState$, (_, s) => s),
