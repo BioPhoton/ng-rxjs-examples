@@ -5,7 +5,7 @@ import {
   Output
 } from '@angular/core';
 import { ReplaySubject, Subject } from 'rxjs';
-import { first, map } from 'rxjs/operators';
+import { filter, first, map } from 'rxjs/operators';
 import { CounterState } from '../../utils/counter-state.interface';
 import { ElementIds } from '../../utils/element-id.enum';
 
@@ -27,23 +27,23 @@ export class CounterComponent {
   }
 
   @Output()
-  btnStart: Subject<Event> = new Subject<Event>();
+  btnStart = new Subject<Event>();
   @Output()
-  btnPause: Subject<Event> = new Subject<Event>();
+  btnPause = new Subject<Event>();
   @Output()
-  btnUp: Subject<Event> = new Subject<Event>();
+  btnUp = new Subject<Event>();
   @Output()
-  btnDown: Subject<Event> = new Subject<Event>();
+  btnDown = new Subject<Event>();
   @Output()
-  btnReset: Subject<Event> = new Subject<Event>();
+  btnReset = new Subject<Event>();
   @Output()
-  btnSetTo: Subject<Event> = new Subject<Event>();
+  btnSetTo = new Subject<Event>();
   @Output()
-  inputTickSpeed: Subject<Event> = new Subject<Event>();
+  inputTickSpeed = new Subject<Event>();
   @Output()
-  inputCountDiff: Subject<Event> = new Subject<Event>();
+  inputCountDiff = new Subject<Event>();
   @Output()
-  inputSetTo: Subject<Event> = new Subject<Event>();
+  inputSetTo = new Subject<Event>();
 
   initialSetToValue$ = this.state$
     .pipe(
