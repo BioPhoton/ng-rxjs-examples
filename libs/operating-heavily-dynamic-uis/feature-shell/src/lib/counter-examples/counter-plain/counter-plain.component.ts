@@ -1,21 +1,6 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import {
-  interval,
-  merge,
-  NEVER,
-  Observable,
-  ReplaySubject,
-  Subject
-} from 'rxjs';
-import {
-  first,
-  map,
-  mapTo,
-  scan,
-  startWith,
-  switchMap,
-  tap
-} from 'rxjs/operators';
+import { Component } from '@angular/core';
+import { interval, merge, NEVER, Observable, Subject, timer } from 'rxjs';
+import { mapTo, scan, startWith, switchMap, tap } from 'rxjs/operators';
 import { CounterState } from '../utils/counter-state.interface';
 import { ElementIds } from '../utils/element-id.enum';
 
@@ -44,8 +29,7 @@ export class CounterPlainComponent {
   count$: Observable<number>;
 
   constructor() {
-    this.mutable();
-    this.immutable();
+
   }
 
   mutable() {
@@ -55,23 +39,37 @@ export class CounterPlainComponent {
     )
       .pipe(
         switchMap(isTicking => isTicking ? interval(this.initialCounterState.tickSpeed) : NEVER),
-        startWith(this.initialCounterState),
-        tap(tick => this.count = this.count + 1)
+        tap(tick => this.count = ++this.count)
       )
       .subscribe();
   }
 
-  immutable(){
+  immutable() {
     this.count$ =
       merge(
         this.btnStart.pipe(mapTo(true)),
-        this.btnPause.pipe(mapTo(false)),
+        this.btnPause.pipe(mapTo(false))
       )
         .pipe(
           switchMap(isTicking => isTicking ? interval(this.initialCounterState.tickSpeed) : NEVER),
           startWith(this.initialCounterState.count),
-          scan(count => ++count),
-        )
+          scan(count => ++count)
+        );
   }
+
+// == CONSTANTS ===========================================================
+// = BASE OBSERVABLES  ====================================================
+// == SOURCE OBSERVABLES ==================================================
+// === STATE OBSERVABLES ==================================================
+// === INTERACTION OBSERVABLES ============================================
+// == INTERMEDIATE OBSERVABLES ============================================
+// = SIDE EFFECTS =========================================================
+// == UI INPUTS ===========================================================
+// == UI OUTPUTS ==========================================================
+// == SUBSCRIPTION ========================================================
+// = HELPER ===============================================================
+// = CUSTOM OPERATORS =====================================================
+// == CREATION METHODS ====================================================
+// == OPERATORS ===========================================================
 
 }
