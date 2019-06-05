@@ -34,48 +34,19 @@ export class CounterContainerComponent {
   counterState$: Observable<CounterState>;
 
   constructor() {
-
-    this.counterState$ = merge(
-      this.btnStart.pipe(mapTo(true)),
-      this.btnPause.pipe(mapTo(false)),
-    )
-    .pipe(
-      switchMap(isTicking => isTicking ? interval(this.initialCounterState.tickSpeed) : NEVER),
-      startWith(this.initialCounterState),
-      scan((state: CounterState) => ({...state, count: ++state.count}))
-    )
-
+    this.immutable();
   }
 
-}
-
-/*
-Step 2
-
-counterState$;
-
-  constructor() {
-
-    this.counterState$ =
-    merge(
+  immutable() {
+    this.counterState$ = merge(
       this.btnStart.pipe(mapTo(true)),
       this.btnPause.pipe(mapTo(false)),
     )
       .pipe(
         switchMap(isTicking => isTicking ? interval(this.initialCounterState.tickSpeed) : NEVER),
         startWith(this.initialCounterState),
-        scan(state => ({...state, count: state.count + 1})),
+        scan((state: CounterState) => ({...state, count: ++state.count}))
       )
-
   }
 
-*/
-
-/*
-FINAL
-
-  getInputValue = getInputValue;
-
-  constructor(public facade: CounterFacade) {
-  }
-*/
+}
