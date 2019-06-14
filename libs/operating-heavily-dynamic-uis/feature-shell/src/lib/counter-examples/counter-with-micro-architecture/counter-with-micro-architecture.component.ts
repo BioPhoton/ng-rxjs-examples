@@ -1,35 +1,15 @@
 import { Component } from '@angular/core';
 import { interval, merge, NEVER, Observable, Subject, timer } from 'rxjs';
 import { mapTo, scan, startWith, switchMap, tap } from 'rxjs/operators';
-
-interface CounterState {
-  isTicking: boolean;
-  count: number;
-  countUp: boolean;
-  tickSpeed: number;
-  countDiff:number;
-}
-
-enum ElementIds {
-  TimerDisplay = 'timer-display',
-  BtnStart = 'btn-start',
-  BtnPause = 'btn-pause',
-  BtnUp = 'btn-up',
-  BtnDown = 'btn-down',
-  BtnReset = 'btn-reset',
-  BtnSetTo = 'btn-set-to',
-  InputSetTo = 'input-set-to',
-  InputTickSpeed = 'input-tick-speed',
-  InputCountDiff = 'input-count-diff'
-}
-
+import { CounterState } from './utils/counter-state.interface';
+import { ElementIds } from './utils/element-id.enum';
 
 @Component({
-  selector: 'ohdui-counter-plain',
-  templateUrl: './counter-plain.component.html',
-  styleUrls: ['./counter-plain.component.scss']
+  selector: 'ohdui-counter-with-micro-architecture',
+  templateUrl: './counter-with-micro-architecture.component.html',
+  styleUrls: ['./counter-with-micro-architecture.component.scss']
 })
-export class CounterPlainComponent {
+export class CounterWithMicroArchitectureComponent {
   elementIds = ElementIds;
 
   initialCounterState: CounterState = {

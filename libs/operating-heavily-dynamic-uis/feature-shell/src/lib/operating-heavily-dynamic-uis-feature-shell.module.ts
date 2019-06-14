@@ -9,6 +9,7 @@ import { CounterContainerComponent } from './counter-examples/counter-container/
 import { CounterComponent } from './counter-examples/counter-container/counter/counter.component';
 import { CounterExamplesComponent } from './counter-examples/counter-examples.component';
 import { CounterPlainComponent } from './counter-examples/counter-plain/counter-plain.component';
+import { CounterWithMicroArchitectureComponent } from './counter-examples/counter-with-micro-architecture/counter-with-micro-architecture.component';
 
 @NgModule({
   imports: [
@@ -32,6 +33,7 @@ import { CounterPlainComponent } from './counter-examples/counter-plain/counter-
   declarations: [
     CounterExamplesComponent,
     CounterPlainComponent,
+    CounterWithMicroArchitectureComponent,
     CounterComponent, CounterContainerComponent,
     CounterWithFacadeComponent, CounterContainerWithFacadeComponent
   ]

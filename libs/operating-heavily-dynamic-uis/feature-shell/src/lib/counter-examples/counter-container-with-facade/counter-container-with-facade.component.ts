@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { initialCounterState } from '../initial-counter-state';
-import { getInputValue } from '../utils/getInputValue';
+import { getInputValue } from './utils/getInputValue';
 import { CounterFacade } from './counter.facade';
 
 @Component({

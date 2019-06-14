@@ -7,9 +7,9 @@ import {
   switchMap,
   withLatestFrom
 } from 'rxjs/operators';
-import { initialCounterState } from '../initial-counter-state';
-import { CounterState } from '../utils/counter-state.interface';
-import { getInputValue } from '../utils/getInputValue';
+import { initialCounterState } from './initial-counter-state';
+import { CounterState } from './utils/counter-state.interface';
+import { getInputValue } from './utils/getInputValue';
 
 @Component({
   selector: 'ohdui-counter-container',
@@ -34,11 +34,6 @@ export class CounterContainerComponent {
       startWith({...this.initialCounterState}),
       scan((state: CounterState) => ({...state, count: ++state.count}))
     );
-
-
-
-
-
 
   immutable() {
     this.counterState$ = merge(

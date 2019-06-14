@@ -17,13 +17,13 @@ import {
   tap,
   withLatestFrom
 } from 'rxjs/operators';
-import { initialCounterState } from '../initial-counter-state';
-import { selectDistinctState } from '../operators/selectDistinctState';
+import { initialCounterState } from './initial-counter-state';
+import { selectDistinctState } from './operators/selectDistinctState';
 import {
   CounterState,
   CounterStateKeys,
   PartialCounterState
-} from '../utils/counter-state.interface';
+} from './utils/counter-state.interface';
 
 @Injectable({
   providedIn: 'root'

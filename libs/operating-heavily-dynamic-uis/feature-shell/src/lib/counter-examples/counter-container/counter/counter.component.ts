@@ -6,8 +6,8 @@ import {
 } from '@angular/core';
 import { ReplaySubject, Subject } from 'rxjs';
 import { filter, first, map } from 'rxjs/operators';
-import { CounterState } from '../../utils/counter-state.interface';
-import { ElementIds } from '../../utils/element-id.enum';
+import { CounterState } from '../utils/counter-state.interface';
+import { ElementIds } from '../utils/element-id.enum';
 
 @Component({
   selector: 'ohdui-counter',
