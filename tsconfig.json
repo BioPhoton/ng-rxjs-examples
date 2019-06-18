@@ -15,16 +15,16 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@@rxjs-examples/polling/feature-shell": [
+      "@rxjs-examples/polling/feature-shell": [
         "libs/polling/feature-shell/src/index.ts"
       ],
-      "@@rxjs-examples/polling/feature-simple": [
+      "@rxjs-examples/polling/feature-simple": [
         "libs/polling/feature-simple/src/index.ts"
       ],
-      "@@rxjs-examples/operating-heavily-dynamic-uis/feature-shell": [
+      "@rxjs-examples/operating-heavily-dynamic-uis/feature-shell": [
         "libs/operating-heavily-dynamic-uis/feature-shell/src/index.ts"
       ],
-      "@@rxjs-examples/shared/core": ["libs/shared/core/src/index.ts"]
+      "@rxjs-examples/shared/core": ["libs/shared/core/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
