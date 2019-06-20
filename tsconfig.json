@@ -1,6 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "rootDir": ".",
     "sourceMap": true,
     "declaration": false,
     "moduleResolution": "node",
@@ -15,16 +16,16 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@rxjs-examples/polling/feature-shell": [
+      "@ng-rx/polling/feature-shell": [
         "libs/polling/feature-shell/src/index.ts"
       ],
-      "@rxjs-examples/polling/feature-simple": [
-        "libs/polling/feature-simple/src/index.ts"
-      ],
-      "@rxjs-examples/operating-heavily-dynamic-uis/feature-shell": [
+      "@ng-rx/operating-heavily-dynamic-uis/feature-shell": [
         "libs/operating-heavily-dynamic-uis/feature-shell/src/index.ts"
       ],
-      "@rxjs-examples/shared/core": ["libs/shared/core/src/index.ts"]
+      "@ng-rx/shared/core": ["libs/shared/core/src/index.ts"],
+      "@ng-rx/subjects/feature-shell": [
+        "libs/subjects/feature-shell/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]

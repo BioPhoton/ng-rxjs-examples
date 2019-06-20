@@ -18,12 +18,17 @@ import { RouterModule } from '@angular/router';
         {
           path: 'polling',
           loadChildren:
-            () => import('@rxjs-examples/polling/feature-shell').then(m => m.PollingFeatureShellModule)
+            () => import('@ng-rx/polling/feature-shell').then(m => m.PollingFeatureShellModule)
         },
         {
           path: 'interactive-uis',
           loadChildren:
-            () => import('@rxjs-examples/operating-heavily-dynamic-uis/feature-shell').then(m => m.OperatingHeavilyDynamicUisFeatureShellModule)
+            () => import('@ng-rx/operating-heavily-dynamic-uis/feature-shell').then(m => m.OperatingHeavilyDynamicUisFeatureShellModule)
+        },
+        {
+          path: 'subjects',
+          loadChildren:
+            () => import('@ng-rx/subjects/feature-shell').then(m => m.SubjectsFeatureShellModule)
         }
       ],
       {

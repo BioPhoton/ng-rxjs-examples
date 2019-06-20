@@ -1,5 +1,5 @@
 {
-  "npmScope": "@rxjs-examples",
+  "npmScope": "nx-v8",
   "implicitDependencies": {
     "angular.json": "*",
     "package.json": "*",
@@ -8,17 +8,44 @@
     "nx.json": "*"
   },
   "projects": {
-    "example-example": {
-      "tags": ["type:app"]
+    "nx-v8-e2e": {
+      "tags": []
+    },
+    "nx-v8": {
+      "tags": []
+    },
+    "exmples-e2e": {
+      "tags": []
+    },
+    "exmples": {
+      "tags": []
+    },
+    "test-e2e": {
+      "tags": []
+    },
+    "test": {
+      "tags": []
+    },
+    "feature-shell-subjects": {
+      "tags": []
+    },
+    "all-examples-e2e": {
+      "tags": []
+    },
+    "all-examples": {
+      "tags": ["type:application"]
     },
     "polling-feature-shell": {
-      "tags": ["scope:polling", "type:feature"]
+      "tags": ["type:library"]
     },
     "operating-heavily-dynamic-uis-feature-shell": {
-      "tags": ["type:feature"]
+      "tags": ["type:library"]
     },
     "shared-core": {
-      "tags": ["scope:lib"]
+      "tags": ["type:library"]
+    },
+    "subjects-feature-shell": {
+      "tags": ["type:library"]
     }
   }
 }

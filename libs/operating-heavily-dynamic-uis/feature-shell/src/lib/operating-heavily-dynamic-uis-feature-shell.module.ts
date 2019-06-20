@@ -1,4 +1,4 @@
-import { SharedCoreModule } from '@rxjs-examples/shared/core';
+import { SharedCoreModule } from '@ng-rx/shared/core';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
