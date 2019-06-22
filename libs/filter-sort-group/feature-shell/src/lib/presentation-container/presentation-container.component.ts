@@ -1,8 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import * as fastSort from 'fast-sort';
-import * as crossfilter from 'crossfilter2';
-import { combineLatest, merge, Observable, Subject } from 'rxjs';
-import { map, scan, startWith, tap } from 'rxjs/operators';
+import { combineLatest, Observable, Subject } from 'rxjs';
+import { map, scan, startWith } from 'rxjs/operators';
 import { data } from '../data';
 import { selectDistinctState } from '../operators/selectDistinctState';
 
@@ -67,6 +66,7 @@ export class PresentationContainerComponent implements OnInit {
       map(([data, sort, filter]) => {
 
         const dataFiltered = this.filter(data, filter);
+
         // group
         const groupedData = dataFiltered;
 
@@ -87,7 +87,37 @@ export class PresentationContainerComponent implements OnInit {
     //const operatorsByMichael = t.dimension((d) => d.michael);
     //const f = operatorsByMichael.filterFunction(v => v === 'Rate-Limit');
     //const top = f.top(Infinity);
-    //console.log('operatorsByMichael', top);
+  }
+
+  prepareData(data: any[]) {
+    if (data.length === 0) {
+      return data;
+    }
+
+    const defaultedData = data.map(d => {
+      const none = 'None';
+      const toNone = (prop) => (d) => !d[prop] ? none : d[prop];
+      d.id = d.id === undefined || d.id === null ? 0 : d.id;
+      d.cedric = toNone('cedric')(d);
+      d.oldSchool = toNone('oldSchool')(d);
+      d.michael = toNone('michael')(d);
+      d.isDeprecate = toNone('isDeprecate')(d);
+      d.isAlias = toNone('isAlias')(d);
+      return d;
+    });
+
+    return defaultedData;
+
+    /*
+    const propertiesToGroup = Object.keys(defaultedData[0]);
+    const groups = propertiesToGroup.reduce((o, prop) => {
+      o[prop] = defaultedData.reduce((g: any, i): any => {
+        g[i[prop]] = true;
+        return g;
+      }, {});
+      return o;
+    }, {});
+*/
   }
 
   sort = (sorting, data: any[]): any[] => {

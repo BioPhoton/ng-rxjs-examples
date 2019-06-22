@@ -34,7 +34,7 @@ export interface ItemViewState<T> {
 export class ItemViewComponent implements AfterViewInit {
 
   stateSubject = new ReplaySubject<ItemViewState<any>>(1);
-  state$ = this.stateSubject.asObservable().pipe(tap(console.log));
+  state$ = this.stateSubject.asObservable();
 
   layout$ = this.state$.pipe(selectDistinctState('layout'));
   data$: Observable<any[]> = this.state$.pipe(selectDistinctState('data'));
@@ -100,13 +100,18 @@ export class ItemViewComponent implements AfterViewInit {
       .remove();
   }
 
-  drawLayout(layout, data: any[]) {
+  getDataTransition(data) {
+    const t = d3.transition().duration(this.animTime);
+    return  this.holder.selectAll('.' + this.selectors.itemClass)
+      .data(data, d => d.id)
+      .transition(t)
+  }
+
+  drawLayout(layout, data: any[], key?: string) {
     const t = d3.transition().duration(this.animTime);
 
     this.holder.attr('class', layout.name);
-    this.holder.selectAll('.' + this.selectors.itemClass)
-      .data(data, d => d.id)
-      .transition(t)
+    this.getDataTransition(data)
       .style('left', layout.left)
       .style('top', layout.top)
       .style('height', layout.height)
@@ -128,26 +133,17 @@ export class ItemViewComponent implements AfterViewInit {
       }, {})
     ) : [];
 
-    const index = group.indexOf(key);
     const myColor = group.length ? d3.scaleSequential().domain([0,group.length])
       .interpolator(d3.interpolateSpectral) : (c) => '#fff';
-
 
     this.holder.selectAll('.' + this.selectors.itemClass)
           .data(data, d => d.id)
           //.transition(t)
-          .style('background', d => {
-            console.log('key', d[key], group, group.indexOf(d[key]), myColor(group.indexOf(d[key])) );
-            return myColor(group.indexOf(d[key]))
-          });
+          .style('background', d => myColor(group.indexOf(d[key])));
 
   }
 
   constructor() {
-    // this.groupColors$.subscribe(console.log);
-  }
-
-  getBackgroundColor(key, data) {
 
   }
 
