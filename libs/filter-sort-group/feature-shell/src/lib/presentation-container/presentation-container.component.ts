@@ -1,15 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import * as fastSort from 'fast-sort';
-import { combineLatest, Observable, Subject } from 'rxjs';
-import { map, scan, startWith } from 'rxjs/operators';
-import { data } from '../data';
-import { selectDistinctState } from '../operators/selectDistinctState';
 
-const getCardsPerRow = (): number => {
-  const width = window.innerWidth - 20;
-  return Math.floor(width / 200);
-};
-
+import { combineLatest } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { filter, getColorMap, sort } from '../utils';
+import { PresentationFacade } from './presentation-facade.service';
 
 @Component({
   selector: 'presentation-container',
@@ -19,121 +13,48 @@ const getCardsPerRow = (): number => {
 })
 export class PresentationContainerComponent implements OnInit {
 
-  action = new Subject();
-
-  initialState = {
-    data: data,
-    layout: {
-      name: 'cards',
-      top: (d, i) => Math.floor(i / getCardsPerRow()) * 90 + 'px',
-      left: (d, i) => (i % getCardsPerRow()) * 200 + 'px',
-      height: 80 + 'px',
-      width: 188 + 'px'
-    },
-    sortConfig: {},
-    filterConfig: ''
-  };
-
-  // COMMAND PROCESSING
-  processed$ = this.action.pipe(
-
-  );
-
-  // WRITING
-  state$ = this.processed$.pipe(
-    startWith(this.initialState),
-    scan((s, c) => ({ ...s, ...c }))
-  );
+  command$ = this.facade.command$;
+  // STATE
+  sortKeys$ = this.facade.data$.pipe(map(a => Object.keys(a[0])));
+  colorMap$ = this.facade.data$.pipe(map(getColorMap));
 
   // DERIVATION
-  //=
-  data$: Observable<any[]> = this.state$.pipe(selectDistinctState('data'));
-  sortConfig$: Observable<any> = this.state$.pipe(selectDistinctState('sortConfig'));
-  filterConfig$: Observable<any> = this.state$.pipe(selectDistinctState('filterConfig'));
-
-  //==
-  sortKeys$ = this.data$.pipe(map(a => Object.keys(a[0])));
-  layout$ = this.state$.pipe(selectDistinctState('layout'));
-
-  //===
-  sortPanelState$ = combineLatest(this.sortConfig$, this.sortKeys$)
+  sortPanelState$ = combineLatest(this.facade.sortConfig$, this.sortKeys$)
     .pipe(
       map(([sortConfig, sortKeys]) => ({ sortConfig, sortKeys }))
     );
 
-  selectedData$ = combineLatest(this.data$, this.sortConfig$, this.filterConfig$)
+  selectedData$ = combineLatest(
+    this.facade.data$,
+    this.facade.sortConfig$,
+    this.facade.filterConfig$
+  )
     .pipe(
-      map(([data, sort, filter]) => {
-
-        const dataFiltered = this.filter(data, filter);
-
+      map(([data, sortConfig, filterConfig]) => {
+        // filter
+        const dataFiltered = filter(data, filterConfig);
         // group
         const groupedData = dataFiltered;
-
         // sort
-        return this.sort(sort, groupedData);
+        return sort(sortConfig, groupedData);
       })
     );
 
-  itemViewState$ = combineLatest(this.layout$, this.selectedData$, this.sortConfig$)
+  itemViewState$ = combineLatest(
+    this.facade.layout$,
+    this.selectedData$,
+    this.facade.sortConfig$,
+    this.colorMap$)
     .pipe(
       map(
-        ([layout, data, sortConfig]) => ({ layout, data, sortConfig })
+        ([layout, data, sortConfig, colorMap]) =>
+          ({ layout, data, sortConfig, colorMap })
       )
     );
 
-  constructor() {
-    //const t = crossfilter(data);
-    //const operatorsByMichael = t.dimension((d) => d.michael);
-    //const f = operatorsByMichael.filterFunction(v => v === 'Rate-Limit');
-    //const top = f.top(Infinity);
+  constructor(private facade: PresentationFacade) {
+    // this.facade.init();
   }
-
-  prepareData(data: any[]) {
-    if (data.length === 0) {
-      return data;
-    }
-
-    const defaultedData = data.map(d => {
-      const none = 'None';
-      const toNone = (prop) => (d) => !d[prop] ? none : d[prop];
-      d.id = d.id === undefined || d.id === null ? 0 : d.id;
-      d.cedric = toNone('cedric')(d);
-      d.oldSchool = toNone('oldSchool')(d);
-      d.michael = toNone('michael')(d);
-      d.isDeprecate = toNone('isDeprecate')(d);
-      d.isAlias = toNone('isAlias')(d);
-      return d;
-    });
-
-    return defaultedData;
-
-    /*
-    const propertiesToGroup = Object.keys(defaultedData[0]);
-    const groups = propertiesToGroup.reduce((o, prop) => {
-      o[prop] = defaultedData.reduce((g: any, i): any => {
-        g[i[prop]] = true;
-        return g;
-      }, {});
-      return o;
-    }, {});
-*/
-  }
-
-  sort = (sorting, data: any[]): any[] => {
-    const sortConfig = Object.entries(sorting)
-      .reduce((config, [key, direction]) => {
-        config.push({ [direction ? 'asc' : 'desc']: d => d[key] });
-        return config;
-      }, []);
-    return sortConfig.length ? fastSort([...data]).by(sortConfig) : data;
-  };
-
-  filter = (d: any[], filterConfig): any[] => {
-    return d && filterConfig ?
-      d.filter(d => d.name.search(filterConfig) >= 0) :
-      d;
-  };
 
   ngOnInit() {
   }

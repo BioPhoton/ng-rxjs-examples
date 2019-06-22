@@ -1,22 +1,20 @@
-<p>
-  presentation-container works!
-</p>
-
-<sort-panel
-  [state]="sortPanelState$ | async"
-  (sortConfigChange)="action.next({sortConfig: $event})">
-</sort-panel>
-<filter-panel
-  [state]="filterConfig$ | async"
-  (filterConfigChange)="action.next({filterConfig: $event})">
-</filter-panel>
-
+<!--
 <pre>
   {{sortConfig$| async | json}}
   {{filterConfig$| async | json}}
   {{(selectedData$| async).length}}
-
 </pre>
+-->
+<h1>RxJS explorer</h1>
+
+<sort-panel
+  [state]="sortPanelState$ | async"
+  (sortConfigChange)="command$.next({sortConfig: $event})">
+</sort-panel>
+<filter-panel
+  [state]="filterConfig$ | async"
+  (filterConfigChange)="command$.next({filterConfig: $event})">
+</filter-panel>
 
 <item-view
   [state]="itemViewState$ | async"

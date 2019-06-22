@@ -33,18 +33,15 @@ export interface ItemViewState<T> {
 })
 export class ItemViewComponent implements AfterViewInit {
 
+  transition = d3.transition().duration(650);
+
+
   stateSubject = new ReplaySubject<ItemViewState<any>>(1);
   state$ = this.stateSubject.asObservable();
 
   layout$ = this.state$.pipe(selectDistinctState('layout'));
   data$: Observable<any[]> = this.state$.pipe(selectDistinctState('data'));
-  primarySortKey$ = this.state$.pipe(selectDistinctState('sortConfig'),
-    map(o => {
-      const length = o ? Object.entries(o).length : 0;
-      return length ? Object.entries(o).shift()[0] : ''
-    }),
-    distinctUntilChanged()
-  );
+  colorMap$ = this.state$.pipe(selectDistinctState('colorMap'));
 
   @Input()
   set state(state) {
@@ -52,9 +49,16 @@ export class ItemViewComponent implements AfterViewInit {
   }
 
   @Output() action = new Subject();
-  // ========================================
+  primarySortKey$ = this.state$.pipe(selectDistinctState('sortConfig'),
+    map(o => {
+      const length = o ? Object.entries(o).length : 0;
+      return length ? Object.entries(o).shift()[0] : '';
+    }),
+    distinctUntilChanged()
+  );
 
-  animTime = 650;
+
+  // ========================================
 
   selectors = {
     parentId: 'holder',
@@ -64,19 +68,11 @@ export class ItemViewComponent implements AfterViewInit {
   };
   holder;
 
-  getCardsPerRow(): number {
-    const width = window.innerWidth - 20;
-    return Math.floor(width / 200);
-  }
-
   renderElements(data) {
-    const t = d3.transition().duration(this.animTime);
-
     this.holder = d3.select('#' + this.selectors.parentId);
-    const enter = this.holder.selectAll('.' + this.selectors.itemClass)
-      .data(data, d => {
-        return d.id;
-      })
+    const enter = this.holder
+      .selectAll('.' + this.selectors.itemClass)
+      .data(data, d => d.id)
       .enter()
       .append('div')
       .attr('class', this.selectors.itemClass);
@@ -90,56 +86,42 @@ export class ItemViewComponent implements AfterViewInit {
 
     this.holder = d3.select('#' + this.selectors.parentId);
     const exit = this.holder.selectAll('.' + this.selectors.itemClass)
-      .data(data, d => {
-        return d.id;
-      })
+      .data(data, d => d.id)
       .exit()
-      .transition(t)
+      .transition(this.transition)
       .style('height', 0 + 'px')
       .style('width', 0 + 'px')
       .remove();
   }
 
-  getDataTransition(data) {
-    const t = d3.transition().duration(this.animTime);
-    return  this.holder.selectAll('.' + this.selectors.itemClass)
-      .data(data, d => d.id)
-      .transition(t)
-  }
-
-  drawLayout(layout, data: any[], key?: string) {
-    const t = d3.transition().duration(this.animTime);
+  drawLayout(layout, data: any[]) {
 
     this.holder.attr('class', layout.name);
-    this.getDataTransition(data)
+    return this.holder.selectAll('.' + this.selectors.itemClass)
+      .data(data, d => d.id)
+      .transition(this.transition)
       .style('left', layout.left)
       .style('top', layout.top)
       .style('height', layout.height)
       .style('width', layout.width);
 
-    const totalHeight = 20 + Math.ceil(data.length / this.getCardsPerRow()) * 90;
-
-    this.holder.transition(t)
-      .style('height', totalHeight);
   }
 
-  drawSortColor(key: string, data: any[]) {
+  drawContainer(layout, data: any[]) {
+    this.holder.transition(this.transition)
+      .style('height', layout.totalHeight(data));
+  }
 
-    const t = d3.transition().duration(this.animTime);
-    const group = key.length ? Object.keys(
-      data.reduce((g: any, i): any => {
-        g[i[key]] = true;
-        return g;
-      }, {})
-    ) : [];
 
-    const myColor = group.length ? d3.scaleSequential().domain([0,group.length])
-      .interpolator(d3.interpolateSpectral) : (c) => '#fff';
+  drawSortColor(key: string, data: any[], colorMap) {
+    if (key === '') {
+      return;
+    }
 
     this.holder.selectAll('.' + this.selectors.itemClass)
-          .data(data, d => d.id)
-          //.transition(t)
-          .style('background', d => myColor(group.indexOf(d[key])));
+      .data(data, d => d.id)
+      //.transition(this.transition)
+      .style('background', d => colorMap[key][d[key]]);
 
   }
 
@@ -155,11 +137,15 @@ export class ItemViewComponent implements AfterViewInit {
         ),
       combineLatest(this.layout$, this.data$)
         .pipe(
-          tap(([layout, data]) => this.drawLayout(layout, data))
+          tap(([layout, data]) => {
+              this.drawLayout(layout, data);
+              this.drawContainer(layout, data);
+            }
+          )
         ),
-      combineLatest(this.primarySortKey$, this.data$)
+      combineLatest(this.primarySortKey$, this.data$, this.colorMap$)
         .pipe(
-          tap(([key, data]) => this.drawSortColor(key, data))
+          tap(([key, data, colorMap]) => this.drawSortColor(key, data, colorMap))
         )
     )
       .subscribe();
