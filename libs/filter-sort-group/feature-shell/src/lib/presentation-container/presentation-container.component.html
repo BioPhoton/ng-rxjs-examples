@@ -1,23 +1,30 @@
-<!--
+<!-- -->
 <pre>
-  {{sortConfig$| async | json}}
-  {{filterConfig$| async | json}}
+  {{sortSelectionState$ | async | json}}
+  {{filterSelectionState$ | async | json}}
   {{(selectedData$| async).length}}
+  {{layoutSelectionState$ | async | json}}
 </pre>
--->
+
 <h1>RxJS explorer</h1>
 
-<sort-panel
-  [state]="sortPanelState$ | async"
+<layout-selection
+  [state]="layoutSelectionState$ | async"
+  (layoutConfigChange)="command$.next({layoutConfig: $event})">
+</layout-selection>
+
+
+<sort-selection
+  [state]="sortSelectionState$ | async"
   (sortConfigChange)="command$.next({sortConfig: $event})">
-</sort-panel>
-<filter-panel
-  [state]="filterConfig$ | async"
+</sort-selection>
+
+<filter-selection
+  [state]="filterSelectionState$ | async"
   (filterConfigChange)="command$.next({filterConfig: $event})">
-</filter-panel>
+</filter-selection>
 
 <item-view
-  [state]="itemViewState$ | async"
->
-
+  [state]="itemViewState$ | async">
 </item-view>
+<!-- -->

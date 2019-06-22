@@ -9,19 +9,19 @@ import {
 import { getInputValue } from '@ng-rx/shared/core';
 import { ReplaySubject, Subject } from 'rxjs';
 import { debounceTime, takeUntil, tap } from 'rxjs/operators';
+import { FilterSelectionState } from './filter-selection-state.interface';
 
 @Component({
-  selector: 'filter-panel',
-  templateUrl: './filter-panel.component.html',
-  styleUrls: ['./filter-panel.component.scss'],
-  encapsulation: ViewEncapsulation.None,
+  selector: 'filter-selection',
+  templateUrl: './filter-selection.component.html',
+  styleUrls: ['./filter-selection.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FilterPanelComponent implements OnDestroy {
+export class FilterSelectionComponent implements OnDestroy {
   ngOnDestroy$ = new Subject();
 
   // BINDINGS
-  stateSubject = new ReplaySubject<string>(1);
+  stateSubject = new ReplaySubject<FilterSelectionState>(1);
 
   @Input() set state(keys) {
     this.stateSubject.next(keys);

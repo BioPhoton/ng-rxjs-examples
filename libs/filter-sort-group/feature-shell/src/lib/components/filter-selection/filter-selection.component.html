@@ -1,0 +1,14 @@
+<div class="filters">
+  <p>Filter Selection</p>
+
+  <!-- <div class="filter"
+   *ngFor="let f of newFilterConfig">
+     <label>{{f | key}}</label>
+     <input type="text"
+       [value]="f[1]">
+   </div> -->
+  <label>Global Search</label>
+  <input type="text"
+    [value]="state$ | async"
+    (input)="actionSubject.next($event)">
+</div>

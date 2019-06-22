@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
-import { combineLatest } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { combineLatest, of } from 'rxjs';
+import { map, shareReplay, tap } from 'rxjs/operators';
 import { filter, getColorMap, sort } from '../utils';
+import { getLayouts } from './layouts';
 import { PresentationFacade } from './presentation-facade.service';
 
 @Component({
@@ -14,11 +15,12 @@ import { PresentationFacade } from './presentation-facade.service';
 export class PresentationContainerComponent {
 
   // COMMANDS
-  command$ = this.facade.command$;
+  command$ = this.facade.command$.pipe(tap(console.log));
 
   // QUERIES
-  sortKeys$ = this.facade.data$.pipe(map(a => Object.keys(a[0])));
+  sortOptions$ = this.facade.data$.pipe(map(a => Object.keys(a[0])));
   colorMap$ = this.facade.data$.pipe(map(getColorMap));
+  layoutOptions$ = of(getLayouts()).pipe(shareReplay(1));
 
   // INTERMEDIATE
   selectedData$ = combineLatest(
@@ -38,13 +40,20 @@ export class PresentationContainerComponent {
     );
 
   // OUTPUT
-  sortPanelState$ = combineLatest(this.facade.sortConfig$, this.sortKeys$)
+  sortSelectionState$ = combineLatest(this.facade.sortConfig$, this.sortOptions$)
     .pipe(
-      map(([sortConfig, sortKeys]) => ({ sortConfig, sortKeys }))
+      map(([sortConfig, sortOptions]) => ({ sortConfig, sortOptions }))
     );
 
+  layoutSelectionState$ = combineLatest(this.facade.layoutConfig$, this.layoutOptions$)
+    .pipe(
+      map(([layoutConfig, layoutOptions]) => ({ layoutConfig, layoutOptions }))
+    );
+
+  filterSelectionState$ = this.facade.filterConfig$;
+
   itemViewState$ = combineLatest(
-    this.facade.layout$,
+    this.facade.layoutConfig$,
     this.selectedData$,
     this.facade.sortConfig$,
     this.colorMap$)
@@ -56,7 +65,7 @@ export class PresentationContainerComponent {
     );
 
   constructor(private facade: PresentationFacade) {
-
+    this.facade.layoutConfig$.subscribe(console.log)
   }
 
 }

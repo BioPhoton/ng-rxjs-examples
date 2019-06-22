@@ -1,0 +1,9 @@
+<div id="layouts-selection">
+  <p>Layout Selection</p>
+
+  <button class="layout"
+    *ngFor="let l of layoutOptions$ | async | keyvalue"
+    (click)="layoutSelection(l)">
+    {{l.key}}
+  </button>
+</div>

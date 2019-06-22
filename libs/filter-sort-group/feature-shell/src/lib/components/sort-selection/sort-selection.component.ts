@@ -7,34 +7,24 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import { selectDistinctState } from '@ng-rx/shared/core';
-import { ReplaySubject, Subject } from 'rxjs';
+import { Observable, ReplaySubject, Subject } from 'rxjs';
 import { map, takeUntil, tap, withLatestFrom } from 'rxjs/operators';
-
-export interface Layout {
-  name: string;
-  top: (d, i) => string;
-  left: (d, i) => string;
-  height: string;
-  width: string;
-}
-
-export interface ItemViewState<T> {
-  data: T[],
-  layout: Layout
-}
+import {
+  SortConfig,
+  SortSelectionState
+} from './sort-selection-state.interface';
 
 @Component({
-  selector: 'sort-panel',
-  templateUrl: './sort-panel.component.html',
-  styleUrls: ['./sort-panel.component.scss'],
-  encapsulation: ViewEncapsulation.None,
+  selector: 'sort-selection',
+  templateUrl: './sort-selection.component.html',
+  styleUrls: ['./sort-selection.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SortPanelComponent implements OnDestroy {
+export class SortSelectionComponent implements OnDestroy {
   ngOnDestroy$ = new Subject();
 
   // BINDINGS
-  stateSubject = new ReplaySubject<{ sortKeys: string[], sortConfig: { [key: string]: boolean } }>(1);
+  stateSubject = new ReplaySubject<SortSelectionState>(1);
   @Input() set state(keys) {
     this.stateSubject.next(keys);
   }
@@ -43,11 +33,11 @@ export class SortPanelComponent implements OnDestroy {
   @Output() sortConfigChange = new Subject();
 
   // STATE
-  sortConfig$ = this.state$.pipe(selectDistinctState('sortConfig'));
-  sortKeys$ = this.state$.pipe(selectDistinctState('sortKeys'));
+  sortConfig$ = this.state$.pipe(selectDistinctState<SortSelectionState, SortConfig>('sortConfig'));
+  sortOptions$ = this.state$.pipe(selectDistinctState<SortSelectionState, string[]>('sortOptions'));
 
   // UI
-  newSortKeySubject = new Subject();
+  newSortKeySubject = new Subject<string>();
   newSortKey$ = this.newSortKeySubject.asObservable();
 
   constructor() {

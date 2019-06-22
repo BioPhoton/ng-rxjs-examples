@@ -93,7 +93,7 @@ export class ItemViewComponent implements AfterViewInit {
   }
 
   drawLayout(layout, data: any[]) {
-    this.holder.attr('class', layout.name);
+    this.holder.attr('class', 'layout '+layout.name);
     return this.holder.selectAll('.' + this.selectors.itemClass)
       .data(data, d => d.id)
       .transition(this.transition)

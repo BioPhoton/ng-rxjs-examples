@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { data } from './data';
+import { RxJsDataItem } from './rxjs-data-item.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiClientService {
 
-  dataSubject = new Subject();
-  data$ = this.dataSubject
+  dataSubject = new Subject<any[]>();
+  data$: Observable<RxJsDataItem[]> = this.dataSubject
     .asObservable()
     .pipe(
       startWith(data),
@@ -22,7 +23,7 @@ export class ApiClientService {
     return this.dataSubject.next(data)
   }
 
-  prepareData(data: any[]) {
+  prepareData(data: any[]): RxJsDataItem[] {
     if (data.length === 0) {
       return data;
     }

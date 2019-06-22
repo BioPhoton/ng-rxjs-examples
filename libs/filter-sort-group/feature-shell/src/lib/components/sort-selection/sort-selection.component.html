@@ -1,6 +1,7 @@
-<div class="sort">
+<div class="sort-selection">
+  <p>Sort Selection</p>
   <button
-    *ngFor="let k of sortKeys$ | async"
+    *ngFor="let k of sortOptions$ | async"
     (click)="newSortKeySubject.next(k)"
     class="btnSort"
     [ngClass]="{
