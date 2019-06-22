@@ -75,10 +75,10 @@ export class PresentationContainerComponent implements OnInit {
       })
     );
 
-  itemViewState$ = combineLatest(this.layout$, this.selectedData$)
+  itemViewState$ = combineLatest(this.layout$, this.selectedData$, this.sortConfig$)
     .pipe(
       map(
-        ([layout, data]) => ({ layout, data })
+        ([layout, data, sortConfig]) => ({ layout, data, sortConfig })
       )
     );
 

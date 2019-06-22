@@ -54,9 +54,7 @@ export class SortPanelComponent implements OnDestroy {
     this.newSortKey$
       .pipe(
         withLatestFrom(this.sortConfig$),
-        map(([key, sortConfig]) => {
-          return this.updateSortConfig(key, sortConfig);
-        }),
+        map(([key, sortConfig]) => this.updateSortConfig(key, sortConfig)),
         // fire output event here
         tap(this.sortConfigChange)
       )
