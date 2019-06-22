@@ -53,7 +53,7 @@ export class PresentationContainerComponent implements OnInit {
     );
 
   constructor(private facade: PresentationFacade) {
-    // this.facade.init();
+
   }
 
   ngOnInit() {
