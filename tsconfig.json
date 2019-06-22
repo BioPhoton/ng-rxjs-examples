@@ -25,6 +25,9 @@
       "@ng-rx/shared/core": ["libs/shared/core/src/index.ts"],
       "@ng-rx/subjects/feature-shell": [
         "libs/subjects/feature-shell/src/index.ts"
+      ],
+      "@nx-v8/filter-sort-group/feature-shell": [
+        "libs/filter-sort-group/feature-shell/src/index.ts"
       ]
     }
   },

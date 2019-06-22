@@ -46,6 +46,9 @@
     },
     "subjects-feature-shell": {
       "tags": ["type:library"]
+    },
+    "filter-sort-group-feature-shell": {
+      "tags": ["type:library"]
     }
   }
 }

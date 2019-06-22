@@ -1,0 +1,109 @@
+#holder{
+  position: relative;
+}
+
+.header{
+  position: absolute;
+  padding: 10px;
+  background-color: #eee;
+  border: solid 1px silver;
+  left: 0px;
+  top: 0px;
+  width: 574px;
+  height: 19px;
+}
+
+.header > div{
+  float: left;
+  width: 194px;
+  line-height: 18px;
+}
+
+.header.sortable > div{
+  cursor: pointer;
+}
+
+
+.item {
+  position: absolute;
+  border: solid 1px silver;
+  background-color: red;
+  overflow: hidden;
+}
+
+.item > div {
+  padding: 5px 10px;
+}
+
+#holder.cards{
+  .header {
+    opacity: 0;
+  }
+
+  .item {
+    border-radius: 5px;
+  }
+  .item .name {
+    font-weight: bold;
+    padding-bottom: 5px;
+  }
+}
+
+/* https://sashat.me/2017/01/11/list-of-20-simple-distinct-colors/ */
+.group-Transform{
+  border-left: solid 7px #800000;
+}
+.group-Merge{
+  border-left: solid 7px #e6194B;
+}
+.group-Combine{
+  border-left: solid 7px #fabebe;
+}
+.group-Filter{
+  border-left: solid 7px #9A6324;
+}
+.group-Rate-Limit{
+  border-left: solid 7px #f58231;
+}
+.group-Scan{
+  border-left: solid 7px #ffd8b1;
+}
+.group-Slice{
+  border-left: solid 7px #808000;
+}
+
+.group-Side-Effect{
+  border-left: solid 7px #ffe119;
+}
+
+.group-Error-Handling{
+  border-left: solid 7px #fffac8;
+}
+
+.group-Multicast{
+  border-left: solid 7px #bfef45;
+}
+
+.group-Scheduling{
+  border-left: solid 7px #3cb44b;
+}
+
+.group-Condition{
+  border-left: solid 7px #aaffc3;
+}
+
+.group-Buffer{
+  border-left: solid 7px #469990;
+}
+
+.group-Creation{
+  border-left: solid 7px #42d4f4;
+}
+
+.group-Subject{
+  border-left: solid 7px #000075;
+}
+
+.group-Timing {
+  border-left: solid 7px #4363d8;
+}

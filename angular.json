@@ -242,6 +242,37 @@
           "styleext": "scss"
         }
       }
+    },
+    "filter-sort-group-feature-shell": {
+      "projectType": "library",
+      "root": "libs/filter-sort-group/feature-shell",
+      "sourceRoot": "libs/filter-sort-group/feature-shell/src",
+      "prefix": "fsg",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/filter-sort-group/feature-shell/tsconfig.lib.json",
+              "libs/filter-sort-group/feature-shell/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/filter-sort-group/feature-shell/jest.config.js",
+            "tsConfig": "libs/filter-sort-group/feature-shell/tsconfig.spec.json",
+            "setupFile": "libs/filter-sort-group/feature-shell/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
     }
   },
   "cli": {

@@ -1,0 +1,12 @@
+<div class="sort">
+  <button
+    *ngFor="let k of sortKeys$ | async"
+    (click)="newSortKeySubject.next(k)"
+    class="btnSort"
+    [ngClass]="{
+    'asc': (sortConfig$ | async)[k] === true,
+    'desc': (sortConfig$ | async)[k]  === false
+  }">
+    {{k}}
+  </button>
+</div>

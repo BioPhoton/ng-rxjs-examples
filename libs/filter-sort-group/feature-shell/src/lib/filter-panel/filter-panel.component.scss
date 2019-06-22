@@ -1,0 +1,10 @@
+
+.btnSort {
+  padding: 5px;
+  &.asc::after {
+    content: '🡑';
+  }
+  &.desc::after {
+    content: '🡓';
+  }
+}

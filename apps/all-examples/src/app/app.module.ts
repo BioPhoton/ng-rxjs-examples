@@ -17,18 +17,31 @@ import { RouterModule } from '@angular/router';
         },
         {
           path: 'polling',
-          loadChildren:
-            () => import('@ng-rx/polling/feature-shell').then(m => m.PollingFeatureShellModule)
+          loadChildren: () =>
+            import('@ng-rx/polling/feature-shell').then(
+              m => m.PollingFeatureShellModule
+            )
         },
         {
           path: 'interactive-uis',
-          loadChildren:
-            () => import('@ng-rx/operating-heavily-dynamic-uis/feature-shell').then(m => m.OperatingHeavilyDynamicUisFeatureShellModule)
+          loadChildren: () =>
+            import('@ng-rx/operating-heavily-dynamic-uis/feature-shell').then(
+              m => m.OperatingHeavilyDynamicUisFeatureShellModule
+            )
         },
         {
           path: 'subjects',
-          loadChildren:
-            () => import('@ng-rx/subjects/feature-shell').then(m => m.SubjectsFeatureShellModule)
+          loadChildren: () =>
+            import('@ng-rx/subjects/feature-shell').then(
+              m => m.SubjectsFeatureShellModule
+            )
+        },
+        {
+          path: 'filter-sort-group',
+          loadChildren: () =>
+            import('@nx-v8/filter-sort-group/feature-shell').then(
+              module => module.FilterSortGroupFeatureShellModule
+            )
         }
       ],
       {

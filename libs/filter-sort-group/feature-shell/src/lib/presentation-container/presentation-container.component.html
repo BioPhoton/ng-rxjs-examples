@@ -1,0 +1,25 @@
+<p>
+  presentation-container works!
+</p>
+
+<sort-panel
+  [state]="sortPanelState$ | async"
+  (sortConfigChange)="action.next({sortConfig: $event})">
+</sort-panel>
+<filter-panel
+  [state]="filterConfig$ | async"
+  (filterConfigChange)="action.next({filterConfig: $event})">
+</filter-panel>
+
+<pre>
+  {{sortConfig$| async | json}}
+  {{filterConfig$| async | json}}
+  {{(selectedData$| async).length}}
+
+</pre>
+
+<item-view
+  [state]="itemViewState$ | async"
+>
+
+</item-view>

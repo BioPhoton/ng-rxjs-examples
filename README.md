@@ -8,6 +8,7 @@
 - ng generate @nrwl/angular:library feature-shell --directory=polling --prefix=pol --style=scss --routing --lazy --parentModule=apps/all-examples/src/app/app.module.ts --tags=type:library
 - ng generate @nrwl/angular:library feature-shell --directory=operating-heavily-dynamic-uis --prefix=ohdui --style=scss --routing --lazy --parentModule=apps/all-examples/src/app/app.module.ts --tags=type:library
 - ng generate @nrwl/angular:library feature-shell --directory=subjects --prefix=sub --style=scss --routing --lazy --parentModule=apps/all-examples/src/app/app.module.ts --tags=type:library
+- ng generate @nrwl/angular:library feature-shell --directory=filter-sort-group --prefix=fsg --style=scss --routing --lazy --parentModule=apps/all-examples/src/app/app.module.ts --tags=type:library
 
 This project was generated using [Nx](https://nx.dev).
 

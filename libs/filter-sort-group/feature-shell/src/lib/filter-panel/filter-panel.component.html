@@ -1,0 +1,7 @@
+<div class="filter">
+  <label>Global Search</label>
+
+  <input type="text"
+    [value]="state$ | async"
+    (input)="actionSubject.next($event)">
+</div>
