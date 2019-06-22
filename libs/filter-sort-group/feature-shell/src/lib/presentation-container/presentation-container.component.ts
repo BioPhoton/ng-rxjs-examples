@@ -11,19 +11,16 @@ import { PresentationFacade } from './presentation-facade.service';
   styleUrls: ['./presentation-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PresentationContainerComponent implements OnInit {
+export class PresentationContainerComponent {
 
+  // COMMANDS
   command$ = this.facade.command$;
-  // STATE
+
+  // QUERIES
   sortKeys$ = this.facade.data$.pipe(map(a => Object.keys(a[0])));
   colorMap$ = this.facade.data$.pipe(map(getColorMap));
 
-  // DERIVATION
-  sortPanelState$ = combineLatest(this.facade.sortConfig$, this.sortKeys$)
-    .pipe(
-      map(([sortConfig, sortKeys]) => ({ sortConfig, sortKeys }))
-    );
-
+  // INTERMEDIATE
   selectedData$ = combineLatest(
     this.facade.data$,
     this.facade.sortConfig$,
@@ -40,6 +37,12 @@ export class PresentationContainerComponent implements OnInit {
       })
     );
 
+  // OUTPUT
+  sortPanelState$ = combineLatest(this.facade.sortConfig$, this.sortKeys$)
+    .pipe(
+      map(([sortConfig, sortKeys]) => ({ sortConfig, sortKeys }))
+    );
+
   itemViewState$ = combineLatest(
     this.facade.layout$,
     this.selectedData$,
@@ -54,9 +57,6 @@ export class PresentationContainerComponent implements OnInit {
 
   constructor(private facade: PresentationFacade) {
 
-  }
-
-  ngOnInit() {
   }
 
 }
