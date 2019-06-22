@@ -35,7 +35,6 @@ export class ItemViewComponent implements AfterViewInit {
 
   transition = d3.transition().duration(650);
 
-
   stateSubject = new ReplaySubject<ItemViewState<any>>(1);
   state$ = this.stateSubject.asObservable();
 
@@ -80,9 +79,8 @@ export class ItemViewComponent implements AfterViewInit {
     enter.insert('div')
       .attr('class', this.selectors.nameClass)
       .html(d => d.name);
-    enter.insert('div')
-      .attr('class', this.selectors.michaelClass)
-      .html(d => d.id + ' ' + d.michael);
+    enter.insert('img')
+      .attr('src', d => `https://raw.githubusercontent.com/BioPhoton/Rx-Marble-Design-System/dev/assets/operators/new/${d.name}.png`);
 
     this.holder = d3.select('#' + this.selectors.parentId);
     const exit = this.holder.selectAll('.' + this.selectors.itemClass)
@@ -95,7 +93,6 @@ export class ItemViewComponent implements AfterViewInit {
   }
 
   drawLayout(layout, data: any[]) {
-
     this.holder.attr('class', layout.name);
     return this.holder.selectAll('.' + this.selectors.itemClass)
       .data(data, d => d.id)
@@ -112,7 +109,6 @@ export class ItemViewComponent implements AfterViewInit {
       .style('height', layout.totalHeight(data));
   }
 
-
   drawSortColor(key: string, data: any[], colorMap) {
     if (key === '') {
       return;
@@ -120,8 +116,13 @@ export class ItemViewComponent implements AfterViewInit {
 
     this.holder.selectAll('.' + this.selectors.itemClass)
       .data(data, d => d.id)
-      //.transition(this.transition)
-      .style('background', d => colorMap[key][d[key]]);
+      .style('border-color', d => colorMap[key][d[key]])
+      .style('border-style', 'solid ')
+      .style('border-width', '1px')
+      //.style('border-left-width', '3px')
+      //.style('border-right-width', '3px')
+      //.style('border-top-width', '3px')
+      .style('border-bottom-width', '8px');
 
   }
 

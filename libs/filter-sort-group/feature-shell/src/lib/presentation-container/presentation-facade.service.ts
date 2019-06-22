@@ -4,9 +4,9 @@ import { ApiClientService } from '@nx-v8/filter-sort-group/api-client';
 import { merge, Observable, Subject } from 'rxjs';
 import { map, scan, shareReplay, startWith } from 'rxjs/operators';
 
-const getCardsPerRow = (): number => {
-  const width = window.innerWidth - 20;
-  return Math.floor(width / 200);
+const getCardsPerRow = (itemWith, margin): number => {
+  const width = window.innerWidth - margin;
+  return Math.floor(width / itemWith);
 };
 
 @Injectable({
@@ -14,15 +14,17 @@ const getCardsPerRow = (): number => {
 })
 export class PresentationFacade {
 
+  itemWidth = 280;
+  itemHeight = 180
   private initialState = {
     data: {},
     layout: {
       name: 'cards',
-      top: (d, i) => Math.floor(i / getCardsPerRow()) * 90 + 'px',
-      left: (d, i) => (i % getCardsPerRow()) * 200 + 'px',
-      height: 80 + 'px',
-      width: 188 + 'px',
-      totalHeight: (data) => 20 + Math.ceil(data.length / getCardsPerRow()) * 90,
+      top: (d, i) => Math.floor(i / getCardsPerRow(this.itemWidth,20)) * 180 + 'px',
+      left: (d, i) => (i % getCardsPerRow(this.itemWidth,20)) * 300 + 'px',
+      height: 160 + 'px',
+      width: 280 + 'px',
+      totalHeight: (data) => 20 + Math.ceil(data.length / getCardsPerRow(this.itemWidth,20)) * 180,
       getColor: (d, i) => d
     },
     colorMap: {},
