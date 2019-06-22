@@ -49,6 +49,9 @@
     },
     "filter-sort-group-feature-shell": {
       "tags": ["type:library"]
+    },
+    "filter-sort-group-api-client": {
+      "tags": []
     }
   }
 }

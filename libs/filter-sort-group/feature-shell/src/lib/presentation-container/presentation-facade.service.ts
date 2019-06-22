@@ -1,16 +1,8 @@
 import { Injectable } from '@angular/core';
-import {
-  combineLatest,
-  concat,
-  defer,
-  merge,
-  Observable,
-  of,
-  Subject
-} from 'rxjs';
-import { first, map, scan, shareReplay, startWith, tap } from 'rxjs/operators';
-import { ApiClientService } from '../api-client.service';
-import { selectDistinctState } from '../operators/selectDistinctState';
+import { selectDistinctState } from '@ng-rx/shared/core';
+import { ApiClientService } from '@nx-v8/filter-sort-group/api-client';
+import { merge, Observable, Subject } from 'rxjs';
+import { map, scan, shareReplay, startWith } from 'rxjs/operators';
 
 const getCardsPerRow = (): number => {
   const width = window.innerWidth - 20;
@@ -38,16 +30,10 @@ export class PresentationFacade {
     filterConfig: ''
   };
 
-  initialState$ = combineLatest(of(this.initialState), defer(() => this.data$))
-    .pipe(
-      map(([s, d]) => ({ ...s, data: d })),
-      first()
-    );
-
   command$ = new Subject();
   state$ = merge(
-      this.command$,
-      this.rxService.data$.pipe(map(data => ({data})))
+    this.command$,
+    this.rxService.data$.pipe(map(data => ({ data })))
   ).pipe(
     startWith(this.initialState),
     scan((s, c) => ({ ...s, ...c })),

@@ -6,9 +6,9 @@ import {
   Output,
   ViewEncapsulation
 } from '@angular/core';
+import { selectDistinctState } from '@ng-rx/shared/core';
 import { ReplaySubject, Subject } from 'rxjs';
 import { map, takeUntil, tap, withLatestFrom } from 'rxjs/operators';
-import { selectDistinctState } from '../operators/selectDistinctState';
 
 export interface Layout {
   name: string;

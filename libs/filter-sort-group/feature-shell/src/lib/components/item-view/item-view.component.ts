@@ -6,10 +6,10 @@ import {
   Output,
   ViewEncapsulation
 } from '@angular/core';
+import { selectDistinctState } from '@ng-rx/shared/core';
 import * as d3 from 'd3';
 import { combineLatest, merge, Observable, ReplaySubject, Subject } from 'rxjs';
 import { distinctUntilChanged, map, tap } from 'rxjs/operators';
-import { selectDistinctState } from '../operators/selectDistinctState';
 
 export interface Layout {
   name: string;

@@ -6,9 +6,9 @@ import {
   Output,
   ViewEncapsulation
 } from '@angular/core';
+import { getInputValue } from '@ng-rx/shared/core';
 import { ReplaySubject, Subject } from 'rxjs';
-import { debounce, debounceTime, takeUntil, tap } from 'rxjs/operators';
-import { getInputValue } from '../operators/getInputValue';
+import { debounceTime, takeUntil, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'filter-panel',
