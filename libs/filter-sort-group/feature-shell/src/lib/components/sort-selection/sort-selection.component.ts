@@ -32,6 +32,12 @@ export class SortSelectionComponent {
     selectDistinctState('sortOptions'),
     isNotUndefined<string[]>()
   );
+  primarySortKey$ = this.sortConfig$.pipe(
+    map(o => {
+      const length = o ? Object.entries(o).length : 0;
+      return length ? Object.entries(o).shift()[0] : '';
+    })
+  );
 
   newSortKeySubject = new Subject<string>();
   @Output() stateChanged = this.newSortKeySubject

@@ -1,5 +1,8 @@
 .btnSort {
   padding: 5px;
+  &.primary {
+    font-weight: bold;
+  }
   &.asc::after {
     content: '🡑';
   }

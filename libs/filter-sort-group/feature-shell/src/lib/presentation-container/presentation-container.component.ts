@@ -15,7 +15,7 @@ import { PresentationFacade } from './presentation-facade.service';
 export class PresentationContainerComponent {
 
   // COMMANDS
-  command$ = this.facade.command$.pipe(tap(console.log));
+  command$ = this.facade.command$;
 
   // QUERIES
   sortOptions$ = this.facade.data$.pipe(map(a => Object.keys(a[0])));
@@ -50,7 +50,7 @@ export class PresentationContainerComponent {
       map(([layoutConfig, layoutOptions]) => ({ layoutConfig, layoutOptions }))
     );
 
-  filterSelectionState$ = combineLatest(this.facade.filterConfig$, of(['name', 'michael']))
+  filterSelectionState$ = combineLatest(this.facade.filterConfig$, of(['name', 'michael', 'cedric', 'oldSchool']))
     .pipe(
       map(([filterConfig, filterOptions]) => ({ filterConfig, filterOptions }))
     );

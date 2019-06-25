@@ -7,7 +7,7 @@ import {
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { isNotUndefined, selectDistinctState } from '@ng-rx/shared/core';
 import { combineLatest, ReplaySubject } from 'rxjs';
-import { map, shareReplay, switchMap } from 'rxjs/operators';
+import { auditTime, map, shareReplay, switchMap } from 'rxjs/operators';
 import { FilterConfig } from './filter-config.interface';
 import { FilterSelectionState } from './filter-selection-state.interface';
 
@@ -52,6 +52,7 @@ export class FilterSelectionComponent {
   @Output() stateChanged = this.formGroup$
     .pipe(
       switchMap(f => f.valueChanges),
+      auditTime(250),
       map(this.selectedPropsMapToOutput)
     );
 

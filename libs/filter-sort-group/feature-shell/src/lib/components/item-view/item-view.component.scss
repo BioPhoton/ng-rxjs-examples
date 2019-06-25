@@ -130,29 +130,29 @@
 
     .item {
       position: absolute;
-      border: solid 1px silver;
+      border: solid 1px lightgray;
       border-radius: 5px;
       overflow: hidden;
+
+      .isOperator,
+      .isDeprecated {
+        display: none;
+      }
+
+      & > div {
+        padding: 5px 10px;
+      }
+
+      .name {
+        font-weight: bold;
+      }
+
     }
 
-    .item > div {
-      padding: 5px 10px;
-    }
-
-    .item .name {
-      background: #fff;
-      position: absolute;
-      font-weight: bold;
-      padding-bottom: 5px;
-    }
-
-    img {
-      width: 100%;
-      height: auto;
-      top: 0;
-      left: 0;
-      z-index: -1;
-      background-image: url('https://raw.githubusercontent.com/BioPhoton/Rx-Marble-Design-System/dev/assets/operators/new/placeholder.png');
+    &.sorted .item {
+      border-style: solid;
+      border-width: 1px;
+      border-bottom-width: 8px;
     }
   }
 

@@ -14,14 +14,16 @@
   [state]="filterSelectionState$ | async"
   (stateChanged)="command$.next({filterConfig: $event})">
 </filter-selection>
+
 <!--
 <pre>
   {{sortSelectionState$ | async | json}}
   {{filterSelectionState$ | async | json}}
-  {{(selectedData$| async).length}}
   {{layoutSelectionState$ | async | json}}
+  {{(selectedData$| async) | json}}
 </pre>
 -->
+
 <item-view
   [state]="itemViewState$ | async">
 </item-view>

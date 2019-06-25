@@ -1,18 +1,26 @@
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   Input,
   Output,
   ViewEncapsulation
 } from '@angular/core';
-import { isNotUndefined, selectDistinctState } from '@ng-rx/shared/core';
-import { RxJsDataItem } from '@nx-v8/filter-sort-group/api-client';
-import * as d3 from 'd3';
-import { combineLatest, merge, Observable, ReplaySubject, Subject } from 'rxjs';
-import { distinctUntilChanged, map, mapTo, tap } from 'rxjs/operators';
+
 import { LayoutConfig } from '../layout-selection/layout-config.interface';
 import { SortConfig } from '../sort-selection/sort-config.interface';
 import { ItemViewState } from './item-view-state.interface';
+import { combineLatest, merge, of, ReplaySubject, Subject } from 'rxjs';
+import {
+  distinctUntilChanged,
+  map,
+  mapTo,
+  startWith,
+  tap
+} from 'rxjs/operators';
+import * as d3 from 'd3';
+import { isNotUndefined, selectDistinctState } from '@ng-rx/shared/core';
+import { RxJsDataItem } from '@nx-v8/filter-sort-group/api-client';
 
 @Component({
   selector: 'item-view',
@@ -23,9 +31,17 @@ import { ItemViewState } from './item-view-state.interface';
 })
 export class ItemViewComponent {
 
-  transition = d3.transition().duration(650);
-  stateSubject = new ReplaySubject<ItemViewState<RxJsDataItem>>(1);
+  selectors = {
+    itemView: 'item-view',
+    item: 'item',
+    sorted: 'sorted'
+  };
 
+  holder;
+
+  transition = d3.transition().duration(650);
+
+  stateSubject = new ReplaySubject<ItemViewState<RxJsDataItem>>(1);
   @Input()
   set state(state) {
     this.stateSubject.next(state);
@@ -46,8 +62,9 @@ export class ItemViewComponent {
 
   layoutName$ = this.layoutConfig$
     .pipe(
-      map(l => l.name() || 'default'),
-      isNotUndefined<string>()
+      map(l => l.name()),
+      isNotUndefined<string>(),
+      startWith('default')
     );
 
   @Output() action = new Subject();
@@ -61,17 +78,12 @@ export class ItemViewComponent {
     distinctUntilChanged<string>()
   );
 
-
-  // ========================================
-
-  selectors = {
-    itemView: 'item-view',
-    item: 'item'
-  };
-  holder;
-
-  //
+  //@TODO
   onNgAfterViewInitSideEffects$ = merge(
+    //@TODO
+    of(true).pipe(
+      tap(v => this.holder = d3.select('.' + this.selectors.itemView))
+    ),
     this.data$
       .pipe(
         tap(data => this.renderElements(data))
@@ -89,7 +101,7 @@ export class ItemViewComponent {
         tap(([key, data, colorMap]) => this.drawSortColor(key, data, colorMap))
       )
   )
-  // dirty hack in view
+    // dirty hack in view
     .pipe(mapTo(''));
 
 
@@ -98,8 +110,6 @@ export class ItemViewComponent {
   }
 
   renderElements(data): void {
-    this.holder = d3.select('.' + this.selectors.itemView);
-
     const visibleProps = ['name', 'isOperator', 'isDeprecated', 'cedric', 'oldSchool', 'michael'];
 
     const enter = this.holder
@@ -118,7 +128,8 @@ export class ItemViewComponent {
     enter.insert('img')
        .attr('src', d => `https://raw.githubusercontent.com/BioPhoton/Rx-Marble-Design-System/dev/assets/operators/new/${d.name}.png`);
     */
-    const exit = this.holder.selectAll('.' + this.selectors.item)
+    const exit = this.holder
+      .selectAll('.' + this.selectors.item)
       .data(data, d => d.id)
       .exit()
       .transition(this.transition)
@@ -128,11 +139,8 @@ export class ItemViewComponent {
   }
 
   drawLayout(layout: LayoutConfig, data: RxJsDataItem[]): void {
-    this.holder = d3.select('.' + this.selectors.itemView);
-
-    this.holder.attr('class', 'layout ' + layout.name());
-
-    return this.holder.selectAll('.' + this.selectors.item)
+    return this.holder
+      .selectAll('.' + this.selectors.item)
       .data(data, d => d.id)
       .transition(this.transition)
       .style('left', layout.left)
@@ -143,27 +151,17 @@ export class ItemViewComponent {
   }
 
   drawContainer(layout: LayoutConfig, data: RxJsDataItem[]): void {
-    this.holder = d3.select('.' + this.selectors.itemView);
 
     this.holder.transition(this.transition)
       .style('height', layout.totalHeight(data));
   }
 
   drawSortColor(key: string, data: RxJsDataItem[], colorMap: {}): void {
-    if (key === '') {
-      return;
-    }
+    this.holder.classed(this.selectors.sorted, !!key);
 
     this.holder.selectAll('.' + this.selectors.item)
       .data(data, d => d.id)
-      .style('border-color', d => colorMap[key][d[key]])
-      .style('border-style', 'solid ')
-      .style('border-width', '1px')
-      //.style('border-left-width', '3px')
-      //.style('border-right-width', '3px')
-      //.style('border-top-width', '3px')
-      .style('border-bottom-width', '8px');
-
+      .style('border-color', d => key ? colorMap[key][d[key]] : 'inherit');
   }
 
 }

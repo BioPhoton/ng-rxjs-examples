@@ -14,10 +14,10 @@ export const getLayouts = () => {
 
     return {
       name: (d, i) => 'original',
-      top: (d, i) => Math.floor(i / cardsPerRow) * itemHeightM + 'px',
-      left: (d, i) => (i % cardsPerRow) * itemWidthM + 'px',
+      top: (d, i) => 0 + 'px',
+      left: (d, i) => 0 + 'px',
       height:  (d, i) => itemHeight + 'px',
-      width: (d, i) => itemWidth + 'px',
+      width: (d, i) =>  itemWidth + 'px',
       totalHeight: (data: any[]) => margin * 2 + Math.ceil(data.length / cardsPerRow) * itemHeightM + 'px'
     };
   };

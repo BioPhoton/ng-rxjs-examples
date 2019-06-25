@@ -1,10 +1,11 @@
 <div class="sort-selection">
   <p>Sort Selection</p>
   <button
-    *ngFor="let k of sortOptions$ | async"
+    *ngFor="let k of (sortOptions$ | async)"
     (click)="newSortKeySubject.next(k)"
     class="btnSort"
     [ngClass]="{
+    'primary': (primarySortKey$ | async) === k,
     'asc': (sortConfig$ | async)[k] === true,
     'desc': (sortConfig$ | async)[k]  === false
   }">

@@ -1,5 +1,6 @@
 import * as d3 from 'd3';
 import * as fastSort from 'fast-sort';
+import { FilterConfig } from './components/filter-selection/filter-config.interface';
 
 export function getColorMap(data) {
 
@@ -43,8 +44,22 @@ export function sort(sorting, data: any[]): any[] {
   return sortConfig.length ? fastSort([...data]).by(sortConfig) : data;
 }
 
-export function filter(d: any[], filterConfig): any[] {
-  return d && filterConfig ?
-    d.filter(d => d.name.search(filterConfig) >= 0) :
-    d;
+export function filter(data: any[], {value, selectedProps}: FilterConfig): any[] {
+
+  if(!selectedProps || value === undefined || value === null || value === ''  ) {
+    return data
+  }
+
+  const map = selectedProps
+    .map(prop => {
+      return  data.filter(d => d[prop].search(value) >= 0)
+    })
+    .reduce((finList, list) => {
+
+      list.forEach(i => finList.set(i.id, i));
+
+      return finList
+    }, new Map())
+
+  return Array.from(map.values());
 }
