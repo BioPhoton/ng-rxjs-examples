@@ -1,57 +1,159 @@
-#holder{
+.item-view {
   position: relative;
-}
-
-.header{
-  position: absolute;
-  padding: 10px;
-  background-color: #eee;
-  border: solid 1px silver;
-  left: 0px;
-  top: 0px;
-  width: 574px;
-  height: 19px;
-}
-
-.header > div{
-  float: left;
-  width: 194px;
-  line-height: 18px;
-}
-
-.header.sortable > div{
-  cursor: pointer;
-}
+  font-family: Roboto,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
 
 
-.item {
-  position: absolute;
-  border: solid 1px silver;
-  overflow: hidden;
-}
+  // = LAYOUTS
 
-.item > div {
-  padding: 5px 10px;
-}
+  // == DEFAULT LAYOUT
 
-#holder.card{
+  .default {
+    // =======
+    // .name,
+    // .isOperator,
+    .isDeprecated,
+    .cedric,
+    .oldSchool,
+    .michael {
+      display: none;
+    }
 
-  .item {
-    border-radius: 5px;
+    // =======
+    .name {
+    }
+    .isOperator {
+    }
+    .isDeprecated {
+    }
+    .cedric {
+    }
+    .oldSchool {
+    }
+    .michael {
+    }
   }
-  .item .name {
-    background: #fff;
-    position: absolute;
-    font-weight: bold;
-    padding-bottom: 5px;
-  }
-
-  img {
+  // == ORIGINAL LAYOUT
+  &.default,
+  &.original {
     width: 100%;
-    height: auto;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    background-image: url('https://raw.githubusercontent.com/BioPhoton/Rx-Marble-Design-System/dev/assets/operators/new/placeholder.png');
+
+    .item {
+      position: relative;
+      height: 20px;
+      padding-left: 20px;
+      margin: 8px 0;
+      overflow: hidden;
+      width: 30%;
+      float: left;
+
+      .isDeprecated,
+      .cedric,
+      .oldSchool,
+      .michael {
+        display: none;
+      }
+
+      .name {
+        color: #546e7a;
+        font-size: 14px;
+        line-height: 20px;
+      }
+
+      .isOperator {
+        left: 0px;
+        top: 3px;
+        position: absolute;
+
+        border-radius: 2px;
+        box-shadow: 0 1px 2px rgba(#000, .24);
+        color: #fff;
+        display: inline-block;
+        font-size: 12px;
+        font-weight: 600;
+        line-height: 20px;
+        text-align: center;
+        width: 16px;
+        overflow: hidden;
+        &:before {
+          display: block;
+          color: #fff;
+        }
+      }
+
+
+
+      &.isDeprecated-Yes {
+        .name {
+          text-decoration: line-through;
+        }
+      }
+
+      &.isOperator-operator,
+      &.isOperator-static,
+      &.isOperator-function {
+        .isOperator {
+          background: #2e7d32;
+          color: #2e7d32;
+          &:before {
+            content: 'F';
+          }
+        }
+      }
+
+      &.isOperator-interface {
+        .isOperator {
+          background: #2e7d32;
+          color: #2e7d32;
+          &:before {
+            content: 'I';
+          }
+        }
+      }
+      &.isOperator-class {
+        .isOperator {
+          background: #2e7d32;
+          color: #2e7d32;
+          &:before {
+            content: 'C';
+          }
+        }
+      }
+
+    }
+
   }
+
+  // == CARD LAYOUT
+  &.card {
+    position: relative;
+    width: 100%;
+
+    .item {
+      position: absolute;
+      border: solid 1px silver;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .item > div {
+      padding: 5px 10px;
+    }
+
+    .item .name {
+      background: #fff;
+      position: absolute;
+      font-weight: bold;
+      padding-bottom: 5px;
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      background-image: url('https://raw.githubusercontent.com/BioPhoton/Rx-Marble-Design-System/dev/assets/operators/new/placeholder.png');
+    }
+  }
+
 }

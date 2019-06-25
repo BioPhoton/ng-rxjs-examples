@@ -1,4 +1,6 @@
+import { FilterConfig } from './filter-config.interface';
+
 export interface FilterSelectionState {
-  filterOptions: string[],
-  filterConfig: {[name: string]: string}
+  filterOptions?: string[],
+  filterConfig?: FilterConfig
 }

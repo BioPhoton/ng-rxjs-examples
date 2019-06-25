@@ -1,14 +1,38 @@
 <div class="filters">
-  <p>Filter Selection</p>
+  <h2>Filter Selection</h2>
 
-  <!-- <div class="filter"
-   *ngFor="let f of newFilterConfig">
-     <label>{{f | key}}</label>
-     <input type="text"
-       [value]="f[1]">
-   </div> -->
-  <label>Global Search</label>
-  <input type="text"
-    [value]="state$ | async"
-    (input)="actionSubject.next($event)">
+  <form
+    *ngIf="(formGroup$ | async) as form"
+    [formGroup]="form">
+
+    <fieldset class="search-fieldset" *ngIf="form.get('value')">
+      <label for="value">Search:</label>
+      <input
+        id="value"
+        type="text"
+        formControlName="value">
+    </fieldset>
+
+    <fieldset class="filter-fieldset"
+      *ngIf="form.get('selectedProps') as selectedProps"
+      [formGroup]="selectedProps">
+
+      <label
+        [for]="c.key"
+        *ngFor="let c of selectedProps.controls | keyvalue">
+
+        {{c.key}}
+
+        <input
+          [id]="c.key"
+          type="checkbox"
+          [formControlName]="c.key"
+          [checked]="c.value.value ? 'checked' : ''">
+
+      </label>
+
+    </fieldset>
+
+  </form>
+
 </div>

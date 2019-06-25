@@ -50,7 +50,10 @@ export class PresentationContainerComponent {
       map(([layoutConfig, layoutOptions]) => ({ layoutConfig, layoutOptions }))
     );
 
-  filterSelectionState$ = this.facade.filterConfig$;
+  filterSelectionState$ = combineLatest(this.facade.filterConfig$, of(['name', 'michael']))
+    .pipe(
+      map(([filterConfig, filterOptions]) => ({ filterConfig, filterOptions }))
+    );
 
   itemViewState$ = combineLatest(
     this.facade.layoutConfig$,
@@ -59,13 +62,12 @@ export class PresentationContainerComponent {
     this.colorMap$)
     .pipe(
       map(
-        ([layout, data, sortConfig, colorMap]) =>
-          ({ layout, data, sortConfig, colorMap })
+        ([layoutConfig, data, sortConfig, colorMap]) =>
+          ({ layoutConfig, data, sortConfig, colorMap })
       )
     );
 
   constructor(private facade: PresentationFacade) {
-    this.facade.layoutConfig$.subscribe(console.log)
   }
 
 }

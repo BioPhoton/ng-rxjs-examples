@@ -2,13 +2,13 @@ import {
   ChangeDetectionStrategy,
   Component,
   Input,
-  OnDestroy,
-  Output,
-  ViewEncapsulation
+  Output
 } from '@angular/core';
-import { getInputValue } from '@ng-rx/shared/core';
-import { ReplaySubject, Subject } from 'rxjs';
-import { debounceTime, takeUntil, tap } from 'rxjs/operators';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { isNotUndefined, selectDistinctState } from '@ng-rx/shared/core';
+import { combineLatest, ReplaySubject } from 'rxjs';
+import { map, shareReplay, switchMap } from 'rxjs/operators';
+import { FilterConfig } from './filter-config.interface';
 import { FilterSelectionState } from './filter-selection-state.interface';
 
 @Component({
@@ -17,40 +17,78 @@ import { FilterSelectionState } from './filter-selection-state.interface';
   styleUrls: ['./filter-selection.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FilterSelectionComponent implements OnDestroy {
-  ngOnDestroy$ = new Subject();
+export class FilterSelectionComponent {
 
-  // BINDINGS
   stateSubject = new ReplaySubject<FilterSelectionState>(1);
 
-  @Input() set state(keys) {
+  @Input() set state(keys: FilterSelectionState) {
     this.stateSubject.next(keys);
   }
 
-  state$ = this.stateSubject.asObservable();
+  // Preparing input values
+  filterConfig$ = this.stateSubject
+    .pipe(
+      selectDistinctState<FilterConfig>('filterConfig'),
+      isNotUndefined<FilterConfig>()
+    );
+  filterOptions$ = this.stateSubject
+    .pipe(
+      selectDistinctState<string[]>('filterOptions'),
+      isNotUndefined<string[]>()
+    );
 
-  @Output() filterConfigChange = new Subject();
+  // Generating Form
+  formGroup$ = combineLatest(this.filterOptions$, this.filterConfig$)
+    .pipe(
+      map(([options, { value, selectedProps }]) => {
+        const selectedPropsConfig = this.selectedPropsMapToInput(options, selectedProps);
+        return this.getForm(value, selectedPropsConfig);
+      }),
+      // we need this because we have multiple subscribers
+      // and we want to have only one instance
+      shareReplay(1)
+    );
 
-  // UI
-  actionSubject = new Subject();
-  action$ = this.actionSubject.asObservable();
+  @Output() stateChanged = this.formGroup$
+    .pipe(
+      switchMap(f => f.valueChanges),
+      map(this.selectedPropsMapToOutput)
+    );
 
-  constructor() {
-    this.action$
-      .pipe(
-        getInputValue(v => v.toString()),
-        debounceTime(250),
-        // fire output event here
-        tap(this.filterConfigChange)
-      )
-      .pipe(
-        takeUntil(this.ngOnDestroy$)
-      )
-      .subscribe();
+
+  constructor(private fb: FormBuilder) {
+
   }
 
-  ngOnDestroy(): void {
-    this.ngOnDestroy$.next(true);
+  selectedPropsMapToInput(options: string[] = [], selectedProps: string[] = []) {
+    return options
+      .reduce((preparedConfig: {}, key: string): {} => {
+        preparedConfig[key] = selectedProps.includes(key);
+        return preparedConfig;
+      }, {});
+  }
+
+  selectedPropsMapToOutput(formValue) {
+    return {
+      ...formValue,
+      selectedProps: Object
+        .keys(formValue.selectedProps)
+        .filter(key => formValue.selectedProps[key])
+    };
+  }
+
+  getForm(value: string, selectedPropsOptions: {}): FormGroup {
+    const selectedPropsFromConfig = Object
+      .keys(selectedPropsOptions)
+      .reduce((a: {}, key): {} => {
+        a[key] = [selectedPropsOptions[key]];
+        return a;
+      }, {});
+
+    return this.fb.group({
+      value: [value],
+      selectedProps: this.fb.group(selectedPropsFromConfig)
+    });
   }
 
 }

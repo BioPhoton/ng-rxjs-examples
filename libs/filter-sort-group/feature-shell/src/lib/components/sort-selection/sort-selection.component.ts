@@ -2,17 +2,13 @@ import {
   ChangeDetectionStrategy,
   Component,
   Input,
-  OnDestroy,
-  Output,
-  ViewEncapsulation
+  Output
 } from '@angular/core';
-import { selectDistinctState } from '@ng-rx/shared/core';
-import { Observable, ReplaySubject, Subject } from 'rxjs';
-import { map, takeUntil, tap, withLatestFrom } from 'rxjs/operators';
-import {
-  SortConfig,
-  SortSelectionState
-} from './sort-selection-state.interface';
+import { isNotUndefined, selectDistinctState } from '@ng-rx/shared/core';
+import { ReplaySubject, Subject } from 'rxjs';
+import { map, shareReplay, withLatestFrom } from 'rxjs/operators';
+import { SortConfig } from './sort-config.interface';
+import { SortSelectionState } from './sort-selection-state.interface';
 
 @Component({
   selector: 'sort-selection',
@@ -20,41 +16,34 @@ import {
   styleUrls: ['./sort-selection.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SortSelectionComponent implements OnDestroy {
-  ngOnDestroy$ = new Subject();
+export class SortSelectionComponent {
 
-  // BINDINGS
   stateSubject = new ReplaySubject<SortSelectionState>(1);
-  @Input() set state(keys) {
+
+  @Input() set state(keys: SortSelectionState) {
     this.stateSubject.next(keys);
   }
-  state$ = this.stateSubject.asObservable();
 
-  @Output() sortConfigChange = new Subject();
+  sortConfig$ = this.stateSubject.pipe(
+    selectDistinctState('sortConfig'),
+    isNotUndefined<SortConfig>()
+  );
+  sortOptions$ = this.stateSubject.pipe(
+    selectDistinctState('sortOptions'),
+    isNotUndefined<string[]>()
+  );
 
-  // STATE
-  sortConfig$ = this.state$.pipe(selectDistinctState<SortSelectionState, SortConfig>('sortConfig'));
-  sortOptions$ = this.state$.pipe(selectDistinctState<SortSelectionState, string[]>('sortOptions'));
-
-  // UI
   newSortKeySubject = new Subject<string>();
-  newSortKey$ = this.newSortKeySubject.asObservable();
+  @Output() stateChanged = this.newSortKeySubject
+    .pipe(
+      withLatestFrom(this.sortConfig$),
+      map(next => this.mapToOutput(...next))
+    );
 
   constructor() {
-    this.newSortKey$
-      .pipe(
-        withLatestFrom(this.sortConfig$),
-        map(([key, sortConfig]) => this.updateSortConfig(key, sortConfig)),
-        // fire output event here
-        tap(this.sortConfigChange)
-      )
-      .pipe(
-        takeUntil(this.ngOnDestroy$)
-      )
-      .subscribe();
   }
 
-  updateSortConfig = (key, sortConfig) => {
+  mapToOutput(key, sortConfig): { [kex: string]: boolean } {
     // the keys state traverse 3 states in following order:
     // not present in the array, true, false
     // on every call the key
@@ -72,9 +61,5 @@ export class SortSelectionComponent implements OnDestroy {
       return newSorting;
     }
   };
-
-  ngOnDestroy(): void {
-    this.ngOnDestroy$.next(true);
-  }
 
 }

@@ -3,7 +3,7 @@
 
   <button class="layout"
     *ngFor="let l of layoutOptions$ | async | keyvalue"
-    (click)="layoutSelection(l)">
+    (click)="stateChanged.emit(l.value)">
     {{l.key}}
   </button>
 </div>

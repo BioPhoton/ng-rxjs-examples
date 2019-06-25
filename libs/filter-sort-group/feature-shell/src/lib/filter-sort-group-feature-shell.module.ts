@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { FilterSelectionComponent } from './components/filter-selection/filter-selection.component';
 import { ItemViewComponent } from './components/item-view/item-view.component';
@@ -10,6 +11,7 @@ import { PresentationContainerComponent } from './presentation-container/present
 @NgModule({
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     RouterModule.forChild([
       { path: '', pathMatch: 'full', component: PresentationContainerComponent }
     ])

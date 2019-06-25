@@ -37,6 +37,8 @@ export class ApiClientService {
       d.michael = toNone('michael')(d);
       d.isDeprecate = toNone('isDeprecate')(d);
       d.isAlias = toNone('isAlias')(d);
+      d.isOperator = toNone('isOperator')(d);
+
       return d;
     });
   }

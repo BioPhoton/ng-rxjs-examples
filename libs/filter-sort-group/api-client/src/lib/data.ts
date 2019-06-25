@@ -2,7 +2,7 @@ export const data: any[] = [
   {
     "id": 1,
     "name": "audit",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Rate-limiting",
     "oldSchool": "Filter",
@@ -13,7 +13,7 @@ export const data: any[] = [
   {
     "id": 2,
     "name": "auditTime",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Rate-limiting",
     "oldSchool": "Filter",
@@ -24,7 +24,7 @@ export const data: any[] = [
   {
     "id": 3,
     "name": "buffer",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Buffering",
     "oldSchool": "Transformation",
@@ -35,7 +35,7 @@ export const data: any[] = [
   {
     "id": 4,
     "name": "bufferCount",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Buffering",
     "oldSchool": "Transformation",
@@ -46,7 +46,7 @@ export const data: any[] = [
   {
     "id": 5,
     "name": "bufferTime",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Buffering",
     "oldSchool": "Transformation",
@@ -57,7 +57,7 @@ export const data: any[] = [
   {
     "id": 6,
     "name": "bufferToggle",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Buffering",
     "oldSchool": "Transformation",
@@ -68,7 +68,7 @@ export const data: any[] = [
   {
     "id": 7,
     "name": "bufferWhen",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Buffering",
     "oldSchool": "Transformation",
@@ -79,7 +79,7 @@ export const data: any[] = [
   {
     "id": 8,
     "name": "catchError",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Misc",
     "oldSchool": "ErrorHandling",
@@ -90,7 +90,7 @@ export const data: any[] = [
   {
     "id": 9,
     "name": "combineAll",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Combining",
     "oldSchool": "Combination",
@@ -101,7 +101,7 @@ export const data: any[] = [
   {
     "id": 10,
     "name": "combineLatest",
-    "isDeprecate": "Yes",
+    "isDeprecated": "Yes",
     "isAlias": "No",
     "cedric": "Combining",
     "oldSchool": "Combination",
@@ -112,7 +112,7 @@ export const data: any[] = [
   {
     "id": 11,
     "name": "concat",
-    "isDeprecate": "Yes",
+    "isDeprecated": "Yes",
     "isAlias": "No",
     "cedric": "Merging",
     "oldSchool": "Combination",
@@ -123,7 +123,7 @@ export const data: any[] = [
   {
     "id": 12,
     "name": "concatAll",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Merging",
     "oldSchool": "Combination",
@@ -134,7 +134,7 @@ export const data: any[] = [
   {
     "id": 13,
     "name": "concatMap",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Merging",
     "oldSchool": "Transformation",
@@ -145,7 +145,7 @@ export const data: any[] = [
   {
     "id": 14,
     "name": "concatMapTo",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Merging",
     "oldSchool": "Transformation",
@@ -156,7 +156,7 @@ export const data: any[] = [
   {
     "id": 15,
     "name": "count",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Reducing",
     "oldSchool": "None",
@@ -167,7 +167,7 @@ export const data: any[] = [
   {
     "id": 16,
     "name": "debounce",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Rate-limiting",
     "oldSchool": "Filter",
@@ -178,7 +178,7 @@ export const data: any[] = [
   {
     "id": 17,
     "name": "debounceTime",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Rate-limiting",
     "oldSchool": "Filter",
@@ -189,7 +189,7 @@ export const data: any[] = [
   {
     "id": 18,
     "name": "defaultIfEmpty",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Rate-limiting",
     "oldSchool": "Conditional",
@@ -200,7 +200,7 @@ export const data: any[] = [
   {
     "id": 19,
     "name": "delay",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Delaying",
     "oldSchool": "Utility",
@@ -211,7 +211,7 @@ export const data: any[] = [
   {
     "id": 20,
     "name": "delayWhen",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Delaying",
     "oldSchool": "Utility",
@@ -222,7 +222,7 @@ export const data: any[] = [
   {
     "id": 21,
     "name": "dematerialize",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Misc",
     "oldSchool": "Utility",
@@ -233,7 +233,7 @@ export const data: any[] = [
   {
     "id": 22,
     "name": "distinct",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Filtering",
     "oldSchool": "Filter",
@@ -244,7 +244,7 @@ export const data: any[] = [
   {
     "id": 23,
     "name": "distinctUntilChanged",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Filtering",
     "oldSchool": "Filter",
@@ -255,7 +255,7 @@ export const data: any[] = [
   {
     "id": 24,
     "name": "distinctUntilKeyChanged",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Filtering",
     "oldSchool": "Filter",
@@ -266,7 +266,7 @@ export const data: any[] = [
   {
     "id": 25,
     "name": "elementAt",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Finding",
     "oldSchool": "None",
@@ -277,7 +277,7 @@ export const data: any[] = [
   {
     "id": 26,
     "name": "endWith",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Merging",
     "oldSchool": "Combination",
@@ -288,7 +288,7 @@ export const data: any[] = [
   {
     "id": 27,
     "name": "every",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Conditional",
     "oldSchool": "Conditional",
@@ -299,7 +299,7 @@ export const data: any[] = [
   {
     "id": 28,
     "name": "exhaust",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Converting",
     "oldSchool": "Combination",
@@ -310,7 +310,7 @@ export const data: any[] = [
   {
     "id": 29,
     "name": "exhaustMap",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Flattening",
     "oldSchool": "Transformation",
@@ -321,7 +321,7 @@ export const data: any[] = [
   {
     "id": 30,
     "name": "expand",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Flattening",
     "oldSchool": "Transformation",
@@ -332,7 +332,7 @@ export const data: any[] = [
   {
     "id": 31,
     "name": "filter",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Flattening",
     "oldSchool": "Filter",
@@ -343,7 +343,7 @@ export const data: any[] = [
   {
     "id": 32,
     "name": "finalize",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Misc",
     "oldSchool": "Utility",
@@ -354,7 +354,7 @@ export const data: any[] = [
   {
     "id": 33,
     "name": "find",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Finding",
     "oldSchool": "Filter",
@@ -365,7 +365,7 @@ export const data: any[] = [
   {
     "id": 34,
     "name": "findIndex",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Finding",
     "oldSchool": "Filter",
@@ -376,7 +376,7 @@ export const data: any[] = [
   {
     "id": 35,
     "name": "first",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Slicing",
     "oldSchool": "Filter",
@@ -387,7 +387,7 @@ export const data: any[] = [
   {
     "id": 36,
     "name": "groupBy",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Misc",
     "oldSchool": "Transformation",
@@ -398,7 +398,7 @@ export const data: any[] = [
   {
     "id": 37,
     "name": "ignoreElements",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Flattening",
     "oldSchool": "Filter",
@@ -409,7 +409,7 @@ export const data: any[] = [
   {
     "id": 38,
     "name": "isEmpty",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Conditional",
     "oldSchool": "None",
@@ -420,7 +420,7 @@ export const data: any[] = [
   {
     "id": 39,
     "name": "last",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Slicing",
     "oldSchool": "Filter",
@@ -431,7 +431,7 @@ export const data: any[] = [
   {
     "id": 40,
     "name": "map",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Mapping",
     "oldSchool": "Transformation",
@@ -442,7 +442,7 @@ export const data: any[] = [
   {
     "id": 41,
     "name": "mapTo",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Mapping",
     "oldSchool": "Transformation",
@@ -453,7 +453,7 @@ export const data: any[] = [
   {
     "id": 42,
     "name": "materialize",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Misc",
     "oldSchool": "None",
@@ -464,7 +464,7 @@ export const data: any[] = [
   {
     "id": 43,
     "name": "max",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Reducing",
     "oldSchool": "None",
@@ -475,7 +475,7 @@ export const data: any[] = [
   {
     "id": 44,
     "name": "merge",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Merging",
     "oldSchool": "Combination",
@@ -486,7 +486,7 @@ export const data: any[] = [
   {
     "id": 45,
     "name": "mergeAll",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Converting",
     "oldSchool": "Combination",
@@ -497,7 +497,7 @@ export const data: any[] = [
   {
     "id": 46,
     "name": "mergeMap",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Flattening",
     "oldSchool": "Transformation",
@@ -508,7 +508,7 @@ export const data: any[] = [
   {
     "id": 47,
     "name": "flatMap",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "Yes",
     "cedric": "Flattening",
     "oldSchool": "Transformation",
@@ -519,7 +519,7 @@ export const data: any[] = [
   {
     "id": 48,
     "name": "mergeMapTo",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Flattening",
     "oldSchool": "Transformation",
@@ -530,7 +530,7 @@ export const data: any[] = [
   {
     "id": 49,
     "name": "mergeScan",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Scanning",
     "oldSchool": "None",
@@ -541,7 +541,7 @@ export const data: any[] = [
   {
     "id": 50,
     "name": "min",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Reducing",
     "oldSchool": "None",
@@ -552,7 +552,7 @@ export const data: any[] = [
   {
     "id": 51,
     "name": "multicast",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Sharing",
     "oldSchool": "Multicasting",
@@ -563,7 +563,7 @@ export const data: any[] = [
   {
     "id": 52,
     "name": "observeOn",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Misc",
     "oldSchool": "None",
@@ -574,7 +574,7 @@ export const data: any[] = [
   {
     "id": 53,
     "name": "onErrorResumeNext",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Misc",
     "oldSchool": "None",
@@ -585,7 +585,7 @@ export const data: any[] = [
   {
     "id": 54,
     "name": "pairwise",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Scanning",
     "oldSchool": "Combination",
@@ -596,7 +596,7 @@ export const data: any[] = [
   {
     "id": 55,
     "name": "partition",
-    "isDeprecate": "Yes",
+    "isDeprecated": "Yes",
     "isAlias": "No",
     "cedric": "Filtering",
     "oldSchool": "Transformation",
@@ -607,7 +607,7 @@ export const data: any[] = [
   {
     "id": 56,
     "name": "pluck",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Mapping",
     "oldSchool": "Transformation",
@@ -618,7 +618,7 @@ export const data: any[] = [
   {
     "id": 57,
     "name": "publish",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Sharing",
     "oldSchool": "Multicasting",
@@ -629,7 +629,7 @@ export const data: any[] = [
   {
     "id": 58,
     "name": "publishBehavior",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Sharing",
     "oldSchool": "None",
@@ -640,7 +640,7 @@ export const data: any[] = [
   {
     "id": 59,
     "name": "publishLast",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Sharing",
     "oldSchool": "None",
@@ -651,7 +651,7 @@ export const data: any[] = [
   {
     "id": 60,
     "name": "publishReplay",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Sharing",
     "oldSchool": "None",
@@ -662,7 +662,7 @@ export const data: any[] = [
   {
     "id": 61,
     "name": "race",
-    "isDeprecate": "Yes",
+    "isDeprecated": "Yes",
     "isAlias": "No",
     "cedric": "Combining",
     "oldSchool": "Combination",
@@ -673,7 +673,7 @@ export const data: any[] = [
   {
     "id": 62,
     "name": "reduce",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Reducing",
     "oldSchool": "Mathematical and Aggregate",
@@ -684,7 +684,7 @@ export const data: any[] = [
   {
     "id": 63,
     "name": "repeat",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Misc",
     "oldSchool": "Utility",
@@ -695,7 +695,7 @@ export const data: any[] = [
   {
     "id": 64,
     "name": "repeatWhen",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Misc",
     "oldSchool": "None",
@@ -706,7 +706,7 @@ export const data: any[] = [
   {
     "id": 65,
     "name": "retry",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Misc",
     "oldSchool": "ErrorHandling",
@@ -717,7 +717,7 @@ export const data: any[] = [
   {
     "id": 66,
     "name": "retryWhen",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Misc",
     "oldSchool": "ErrorHandling",
@@ -728,7 +728,7 @@ export const data: any[] = [
   {
     "id": 67,
     "name": "refCount",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Sharing",
     "oldSchool": "None",
@@ -739,7 +739,7 @@ export const data: any[] = [
   {
     "id": 68,
     "name": "sample",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Rate-limiting",
     "oldSchool": "None",
@@ -750,7 +750,7 @@ export const data: any[] = [
   {
     "id": 69,
     "name": "sampleTime",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Rate-limiting",
     "oldSchool": "Filter",
@@ -761,7 +761,7 @@ export const data: any[] = [
   {
     "id": 70,
     "name": "scan",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Scanning",
     "oldSchool": "Transformation",
@@ -772,7 +772,7 @@ export const data: any[] = [
   {
     "id": 71,
     "name": "sequenceEqual",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Conditional",
     "oldSchool": "Conditional",
@@ -783,7 +783,7 @@ export const data: any[] = [
   {
     "id": 72,
     "name": "share",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Sharing",
     "oldSchool": "Multicasting",
@@ -794,7 +794,7 @@ export const data: any[] = [
   {
     "id": 73,
     "name": "shareReplay",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Sharing",
     "oldSchool": "Multicasting",
@@ -805,7 +805,7 @@ export const data: any[] = [
   {
     "id": 74,
     "name": "single",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Flattening",
     "oldSchool": "Filter",
@@ -816,7 +816,7 @@ export const data: any[] = [
   {
     "id": 75,
     "name": "skip",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Slicing",
     "oldSchool": "Filter",
@@ -827,7 +827,7 @@ export const data: any[] = [
   {
     "id": 76,
     "name": "skipLast",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Slicing",
     "oldSchool": "Filter",
@@ -838,7 +838,7 @@ export const data: any[] = [
   {
     "id": 77,
     "name": "skipUntil",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Slicing",
     "oldSchool": "Filter",
@@ -849,7 +849,7 @@ export const data: any[] = [
   {
     "id": 78,
     "name": "skipWhile",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Slicing",
     "oldSchool": "Filter",
@@ -860,7 +860,7 @@ export const data: any[] = [
   {
     "id": 79,
     "name": "startWith",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Merging",
     "oldSchool": "Combination",
@@ -871,7 +871,7 @@ export const data: any[] = [
   {
     "id": 80,
     "name": "subscribeOn",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Misc",
     "oldSchool": "None",
@@ -882,7 +882,7 @@ export const data: any[] = [
   {
     "id": 81,
     "name": "switchAll",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Slicing",
     "oldSchool": "Filter",
@@ -893,7 +893,7 @@ export const data: any[] = [
   {
     "id": 82,
     "name": "switchMap",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Slicing",
     "oldSchool": "Filter",
@@ -904,7 +904,7 @@ export const data: any[] = [
   {
     "id": 83,
     "name": "switchMapTo",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Slicing",
     "oldSchool": "Filter",
@@ -915,7 +915,7 @@ export const data: any[] = [
   {
     "id": 84,
     "name": "switchScan",
-    "isDeprecate": "",
+    "isDeprecated": "",
     "isAlias": "",
     "cedric": "",
     "oldSchool": "",
@@ -926,7 +926,7 @@ export const data: any[] = [
   {
     "id": 85,
     "name": "take",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Slicing",
     "oldSchool": "Filter",
@@ -937,7 +937,7 @@ export const data: any[] = [
   {
     "id": 86,
     "name": "takeLast",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Slicing",
     "oldSchool": "Filter",
@@ -948,7 +948,7 @@ export const data: any[] = [
   {
     "id": 87,
     "name": "takeUntil",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Slicing",
     "oldSchool": "Filter",
@@ -959,7 +959,7 @@ export const data: any[] = [
   {
     "id": 88,
     "name": "takeWhile",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Slicing",
     "oldSchool": "Filter",
@@ -970,7 +970,7 @@ export const data: any[] = [
   {
     "id": 89,
     "name": "tap",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Misc",
     "oldSchool": "Utility",
@@ -981,7 +981,7 @@ export const data: any[] = [
   {
     "id": 90,
     "name": "throttle",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Rate-limiting",
     "oldSchool": "Filter",
@@ -992,7 +992,7 @@ export const data: any[] = [
   {
     "id": 91,
     "name": "throttleTime",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Rate-limiting",
     "oldSchool": "Filter",
@@ -1003,7 +1003,7 @@ export const data: any[] = [
   {
     "id": 92,
     "name": "throwIfEmpty",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Misc",
     "oldSchool": "ErrorHandling",
@@ -1014,7 +1014,7 @@ export const data: any[] = [
   {
     "id": 93,
     "name": "timeInterval",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Misc",
     "oldSchool": "None",
@@ -1025,7 +1025,7 @@ export const data: any[] = [
   {
     "id": 94,
     "name": "timeout",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Misc",
     "oldSchool": "Utility",
@@ -1036,7 +1036,7 @@ export const data: any[] = [
   {
     "id": 95,
     "name": "timeoutWith",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Misc",
     "oldSchool": "None",
@@ -1047,7 +1047,7 @@ export const data: any[] = [
   {
     "id": 96,
     "name": "timestamp",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Misc",
     "oldSchool": "None",
@@ -1058,7 +1058,7 @@ export const data: any[] = [
   {
     "id": 97,
     "name": "toArray",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Reducing",
     "oldSchool": "Transformation",
@@ -1069,7 +1069,7 @@ export const data: any[] = [
   {
     "id": 98,
     "name": "window",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Windowing",
     "oldSchool": "Transformation",
@@ -1080,7 +1080,7 @@ export const data: any[] = [
   {
     "id": 99,
     "name": "windowCount",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Windowing",
     "oldSchool": "Transformation",
@@ -1091,7 +1091,7 @@ export const data: any[] = [
   {
     "id": 100,
     "name": "windowTime",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Windowing",
     "oldSchool": "Transformation",
@@ -1102,7 +1102,7 @@ export const data: any[] = [
   {
     "id": 101,
     "name": "windowToggle",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Windowing",
     "oldSchool": "Transformation",
@@ -1113,7 +1113,7 @@ export const data: any[] = [
   {
     "id": 102,
     "name": "windowWhen",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Windowing",
     "oldSchool": "Transformation",
@@ -1124,7 +1124,7 @@ export const data: any[] = [
   {
     "id": 103,
     "name": "withLatestFrom",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Combining",
     "oldSchool": "Combination",
@@ -1135,7 +1135,7 @@ export const data: any[] = [
   {
     "id": 104,
     "name": "zip",
-    "isDeprecate": "Yes",
+    "isDeprecated": "Yes",
     "isAlias": "No",
     "cedric": "Combining",
     "oldSchool": "Combination",
@@ -1146,7 +1146,7 @@ export const data: any[] = [
   {
     "id": 105,
     "name": "zipAll",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Converting",
     "oldSchool": "Combination",
@@ -1157,7 +1157,7 @@ export const data: any[] = [
   {
     "id": 106,
     "name": "AsyncSubject",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "None",
     "oldSchool": "Subject",
@@ -1168,7 +1168,7 @@ export const data: any[] = [
   {
     "id": 107,
     "name": "BehaviorSubject",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "None",
     "oldSchool": "Subject",
@@ -1179,7 +1179,7 @@ export const data: any[] = [
   {
     "id": 108,
     "name": "combineLatest",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Combining",
     "oldSchool": "None",
@@ -1190,7 +1190,7 @@ export const data: any[] = [
   {
     "id": 109,
     "name": "concat",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Merging",
     "oldSchool": "Combination",
@@ -1201,7 +1201,7 @@ export const data: any[] = [
   {
     "id": 110,
     "name": "create (Observable.create)",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "None",
     "oldSchool": "Creation",
@@ -1212,7 +1212,7 @@ export const data: any[] = [
   {
     "id": 111,
     "name": "defer",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "None",
     "oldSchool": "Creation",
@@ -1223,7 +1223,7 @@ export const data: any[] = [
   {
     "id": 112,
     "name": "EMPTY",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "None",
     "oldSchool": "Creation",
@@ -1234,7 +1234,7 @@ export const data: any[] = [
   {
     "id": 113,
     "name": "forkJoin",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Combining",
     "oldSchool": "Combination",
@@ -1245,7 +1245,7 @@ export const data: any[] = [
   {
     "id": 114,
     "name": "from",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "None",
     "oldSchool": "Creation",
@@ -1256,7 +1256,7 @@ export const data: any[] = [
   {
     "id": 115,
     "name": "fromEvent",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "None",
     "oldSchool": "Creation",
@@ -1267,7 +1267,7 @@ export const data: any[] = [
   {
     "id": 116,
     "name": "fromEventPattern",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "None",
     "oldSchool": "Creation",
@@ -1278,7 +1278,7 @@ export const data: any[] = [
   {
     "id": 117,
     "name": "generate",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "None",
     "oldSchool": "None",
@@ -1289,7 +1289,7 @@ export const data: any[] = [
   {
     "id": 118,
     "name": "iif",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "None",
     "oldSchool": "Conditional",
@@ -1300,7 +1300,7 @@ export const data: any[] = [
   {
     "id": 119,
     "name": "interval",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "None",
     "oldSchool": "Creation",
@@ -1311,7 +1311,7 @@ export const data: any[] = [
   {
     "id": 120,
     "name": "merge",
-    "isDeprecate": "Yes",
+    "isDeprecated": "Yes",
     "isAlias": "No",
     "cedric": "Merging",
     "oldSchool": "Combination",
@@ -1322,7 +1322,7 @@ export const data: any[] = [
   {
     "id": 121,
     "name": "NEVER",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "None",
     "oldSchool": "None",
@@ -1333,7 +1333,7 @@ export const data: any[] = [
   {
     "id": 122,
     "name": "of",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "None",
     "oldSchool": "Creation",
@@ -1344,7 +1344,7 @@ export const data: any[] = [
   {
     "id": 123,
     "name": "onErrorResumeNext",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "None",
     "oldSchool": "None",
@@ -1355,7 +1355,7 @@ export const data: any[] = [
   {
     "id": 124,
     "name": "pairs",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "None",
     "oldSchool": "None",
@@ -1366,7 +1366,7 @@ export const data: any[] = [
   {
     "id": 125,
     "name": "race",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "None",
     "oldSchool": "None",
@@ -1377,7 +1377,7 @@ export const data: any[] = [
   {
     "id": 126,
     "name": "range",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "None",
     "oldSchool": "Creation",
@@ -1388,7 +1388,7 @@ export const data: any[] = [
   {
     "id": 127,
     "name": "ReplaySubject",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "None",
     "oldSchool": "Subject",
@@ -1399,7 +1399,7 @@ export const data: any[] = [
   {
     "id": 128,
     "name": "Subject",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "None",
     "oldSchool": "Subject",
@@ -1410,7 +1410,7 @@ export const data: any[] = [
   {
     "id": 129,
     "name": "throwError",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "None",
     "oldSchool": "Creation",
@@ -1421,7 +1421,7 @@ export const data: any[] = [
   {
     "id": 130,
     "name": "timer",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "None",
     "oldSchool": "Creation",
@@ -1432,7 +1432,7 @@ export const data: any[] = [
   {
     "id": 131,
     "name": "zip",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "Combining",
     "oldSchool": "Combination",
@@ -1443,7 +1443,7 @@ export const data: any[] = [
   {
     "id": 132,
     "name": "scheduled",
-    "isDeprecate": "No",
+    "isDeprecated": "No",
     "isAlias": "No",
     "cedric": "None",
     "oldSchool": "None",

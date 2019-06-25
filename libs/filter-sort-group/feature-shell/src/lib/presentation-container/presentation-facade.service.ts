@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { selectDistinctState } from '@ng-rx/shared/core';
 import { ApiClientService } from '@nx-v8/filter-sort-group/api-client';
 import { merge, Observable, Subject } from 'rxjs';
-import { map, scan, shareReplay, startWith } from 'rxjs/operators';
+import { map, scan, shareReplay, startWith, tap } from 'rxjs/operators';
 import { initRxJsExplorerState } from './initial-state';
 import { RxJsExplorerState } from './rxjs-explorer-state.interface';
 
@@ -20,7 +20,7 @@ export class PresentationFacade {
 
   command$ = new Subject();
   state$ = merge(
-    this.command$,
+    this.command$.pipe(tap(c => console.log('facade command', c))),
     this.rxService.data$.pipe(map(data => ({ data })))
   ).pipe(
     startWith(this.initialState),

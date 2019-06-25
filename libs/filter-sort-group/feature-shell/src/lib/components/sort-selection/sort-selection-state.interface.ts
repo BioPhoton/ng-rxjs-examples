@@ -1,6 +1,4 @@
-export interface SortConfig {
-  [key: string]: boolean
-}
+import { SortConfig } from './sort-config.interface';
 
 export interface SortSelectionState {
   sortOptions: string[],

@@ -1,30 +1,27 @@
-<!-- -->
+<h1>RxJS explorer</h1>
+
+<layout-selection
+  [state]="layoutSelectionState$ | async"
+  (stateChanged)="command$.next({layoutConfig: $event})">
+</layout-selection>
+
+<sort-selection
+  [state]="sortSelectionState$ | async"
+  (stateChanged)="command$.next({sortConfig: $event})">
+</sort-selection>
+
+<filter-selection
+  [state]="filterSelectionState$ | async"
+  (stateChanged)="command$.next({filterConfig: $event})">
+</filter-selection>
+<!--
 <pre>
   {{sortSelectionState$ | async | json}}
   {{filterSelectionState$ | async | json}}
   {{(selectedData$| async).length}}
   {{layoutSelectionState$ | async | json}}
 </pre>
-
-<h1>RxJS explorer</h1>
-
-<layout-selection
-  [state]="layoutSelectionState$ | async"
-  (layoutConfigChange)="command$.next({layoutConfig: $event})">
-</layout-selection>
-
-
-<sort-selection
-  [state]="sortSelectionState$ | async"
-  (sortConfigChange)="command$.next({sortConfig: $event})">
-</sort-selection>
-
-<filter-selection
-  [state]="filterSelectionState$ | async"
-  (filterConfigChange)="command$.next({filterConfig: $event})">
-</filter-selection>
-
+-->
 <item-view
   [state]="itemViewState$ | async">
 </item-view>
-<!-- -->
