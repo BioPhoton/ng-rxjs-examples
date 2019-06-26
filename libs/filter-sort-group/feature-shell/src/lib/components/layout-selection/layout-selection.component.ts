@@ -6,7 +6,8 @@ import {
   Output
 } from '@angular/core';
 import { isNotUndefined, selectDistinctState } from '@ng-rx/shared/core';
-import { ReplaySubject } from 'rxjs';
+import { defer, Observable, ReplaySubject } from 'rxjs';
+import { observe } from '../../utils';
 import { LayoutConfig } from './layout-config.interface';
 import { LayoutSelectionState } from './layout-selection-state.interface';
 
@@ -18,25 +19,28 @@ import { LayoutSelectionState } from './layout-selection-state.interface';
 })
 export class LayoutSelectionComponent {
 
-  stateSubject = new ReplaySubject<LayoutSelectionState>(1);
-
-  @Input() set state(state) {
-    this.stateSubject.next(state);
-  }
+  @Input()state;
+  state$: Observable<LayoutSelectionState>
 
   @Output() stateChanged = new EventEmitter<LayoutConfig>();
 
-  layoutConfig$ = this.stateSubject.pipe(
-    selectDistinctState<LayoutConfig>('layoutConfig'),
-    isNotUndefined()
+  layoutConfig$ = defer(() => this.state$
+    .pipe(
+      selectDistinctState<LayoutConfig>('layoutConfig'),
+      isNotUndefined()
+    )
   );
-  layoutOptions$ = this.stateSubject.pipe(
-    selectDistinctState<string[]>('layoutOptions'),
-    isNotUndefined()
+  layoutOptions$ = defer(() => this.state$
+    .pipe(
+      selectDistinctState<string[]>('layoutOptions'),
+      isNotUndefined()
+    )
   );
 
   constructor() {
-
+    const { state , proxy } = observe<LayoutSelectionState>(this, 'state', new ReplaySubject<LayoutSelectionState>(1));
+    this.state$ = state;
+    return proxy;
   }
 
 }

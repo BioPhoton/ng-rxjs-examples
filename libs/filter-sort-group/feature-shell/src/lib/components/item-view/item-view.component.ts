@@ -3,24 +3,32 @@ import {
   ChangeDetectionStrategy,
   Component,
   Input,
-  Output,
   ViewEncapsulation
 } from '@angular/core';
-
-import { LayoutConfig } from '../layout-selection/layout-config.interface';
-import { SortConfig } from '../sort-selection/sort-config.interface';
-import { ItemViewState } from './item-view-state.interface';
-import { combineLatest, merge, of, ReplaySubject, Subject } from 'rxjs';
+import { isNotUndefined, selectDistinctState } from '@ng-rx/shared/core';
+import { RxJsDataItem } from '@nx-v8/filter-sort-group/api-client';
+import * as d3 from 'd3';
+import {
+  combineLatest,
+  defer,
+  merge,
+  Observable,
+  ReplaySubject,
+  Subject
+} from 'rxjs';
 import {
   distinctUntilChanged,
   map,
   mapTo,
-  startWith,
-  tap
+  tap,
+  withLatestFrom
 } from 'rxjs/operators';
-import * as d3 from 'd3';
-import { isNotUndefined, selectDistinctState } from '@ng-rx/shared/core';
-import { RxJsDataItem } from '@nx-v8/filter-sort-group/api-client';
+import { observe } from '../../utils';
+
+import { LayoutConfig } from '../layout-selection/layout-config.interface';
+import { LayoutSelectionState } from '../layout-selection/layout-selection-state.interface';
+import { SortConfig } from '../sort-selection/sort-config.interface';
+import { ItemViewState } from './item-view-state.interface';
 
 @Component({
   selector: 'item-view',
@@ -29,7 +37,7 @@ import { RxJsDataItem } from '@nx-v8/filter-sort-group/api-client';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ItemViewComponent {
+export class ItemViewComponent implements AfterViewInit {
 
   selectors = {
     itemView: 'item-view',
@@ -37,89 +45,109 @@ export class ItemViewComponent {
     sorted: 'sorted'
   };
 
-  holder;
-
   transition = d3.transition().duration(650);
 
-  stateSubject = new ReplaySubject<ItemViewState<RxJsDataItem>>(1);
-  @Input()
-  set state(state) {
-    this.stateSubject.next(state);
-  }
+  afterViewInit$ = new Subject<boolean>();
 
-  layoutConfig$ = this.stateSubject
-    .pipe(
-      selectDistinctState('layoutConfig'),
-      isNotUndefined<LayoutConfig>()
-    );
-  data$ = this.stateSubject.pipe(
+  @Input()
+  state;
+  state$: Observable<LayoutSelectionState>;
+
+  layoutConfig$ = defer(() => this.state$.pipe(
+    selectDistinctState('layoutConfig'),
+    isNotUndefined<LayoutConfig>()
+  ));
+  data$ = defer(() => this.state$.pipe(
     selectDistinctState('data'),
     isNotUndefined<RxJsDataItem[]>()
-  );
-  colorMap$ = this.stateSubject.pipe(
+  ));
+  colorMap$ = defer(() => this.state$.pipe(
     selectDistinctState('colorMap'),
-    isNotUndefined<{}>());
-
-  layoutName$ = this.layoutConfig$
-    .pipe(
-      map(l => l.name()),
-      isNotUndefined<string>(),
-      startWith('default')
-    );
-
-  @Output() action = new Subject();
-
-  primarySortKey$ = this.stateSubject.pipe(
+    isNotUndefined<{}>())
+  );
+  primarySortKey$ = defer(() => this.state$.pipe(
     selectDistinctState<SortConfig>('sortConfig'),
     map(o => {
       const length = o ? Object.entries(o).length : 0;
       return length ? Object.entries(o).shift()[0] : '';
     }),
     distinctUntilChanged<string>()
+    )
   );
 
-  //@TODO
+
+  layoutName$ = this.layoutConfig$
+    .pipe(
+      map(l => l.name() || 'default')
+    );
+
+  holder$ = this.afterViewInit$
+    .pipe(
+      map(_ => d3.select('.' + this.selectors.itemView))
+    );
+
+  selectedElements$ = this.holder$.pipe(
+    // select elements
+    map(holder => holder.selectAll('.' + this.selectors.item))
+  );
+
+  boundDataElements$ = this.selectedElements$.pipe(
+    // bind de elements with latest data
+    withLatestFrom(this.data$, (holder, data) => holder.data(data, d => d.id))
+  );
+
   onNgAfterViewInitSideEffects$ = merge(
-    //@TODO
-    of(true).pipe(
-      tap(v => this.holder = d3.select('.' + this.selectors.itemView))
-    ),
-    this.data$
+    combineLatest(this.holder$, this.layoutConfig$, this.data$)
       .pipe(
-        tap(data => this.renderElements(data))
+        tap((d) => this.renderContainer(...d))
       ),
-    combineLatest(this.layoutConfig$, this.data$)
+    this.boundDataElements$
       .pipe(
-        tap(([layout, data]) => {
-            this.drawLayout(layout, data);
-            this.drawContainer(layout, data);
-          }
+        tap(v => this.renderEnterElems(v)),
+        tap(v => this.renderExitElems(v))
+      ),
+    //@TODO
+    combineLatest(this.selectedElements$, this.layoutConfig$, this.data$, this.boundDataElements$)
+      .pipe(
+        tap((d) => this.renderUpdateElems(...d)
         )
       ),
-    combineLatest(this.primarySortKey$, this.data$, this.colorMap$)
+    combineLatest(this.holder$, this.primarySortKey$, this.boundDataElements$, this.colorMap$)
       .pipe(
-        tap(([key, data, colorMap]) => this.drawSortColor(key, data, colorMap))
+        tap((d) => this.renderSortColor(...d))
       )
   )
-    // dirty hack in view
+  // dirty hack in view
     .pipe(mapTo(''));
 
-
   constructor() {
-
+    const { state, proxy } = observe<LayoutSelectionState>(this, 'state', new ReplaySubject<ItemViewState<RxJsDataItem>>(1));
+    this.state$ = state;
+    return proxy;
   }
 
-  renderElements(data): void {
+  // Life cycle hooks
+
+  ngAfterViewInit(): void {
+    this.afterViewInit$.next(true);
+  }
+
+  // rendering function
+
+  renderContainer(holder, layout: LayoutConfig, data: RxJsDataItem[]): void {
+    holder
+      .transition(this.transition)
+      .style('height', layout.totalHeight(data));
+  }
+
+  renderEnterElems(elems) {
     const visibleProps = ['name', 'isOperator', 'isDeprecated', 'cedric', 'oldSchool', 'michael'];
 
-    const enter = this.holder
-      .selectAll('.' + this.selectors.item)
-      .data(data, d => d.id)
-      .enter()
-      .append('div')
+    const enterElems = elems.enter();
+    const items = enterElems.append('div')
       .attr('class', d => this.selectors.item + visibleProps.reduce((a, i) => a + `${i}-${d[i]} `, ' '));
 
-    visibleProps.forEach(p => enter
+    visibleProps.forEach(p => items
       .insert('div')
       .attr('class', p)
       .html(d => d[p])
@@ -128,21 +156,13 @@ export class ItemViewComponent {
     enter.insert('img')
        .attr('src', d => `https://raw.githubusercontent.com/BioPhoton/Rx-Marble-Design-System/dev/assets/operators/new/${d.name}.png`);
     */
-    const exit = this.holder
-      .selectAll('.' + this.selectors.item)
-      .data(data, d => d.id)
-      .exit()
-      .transition(this.transition)
-      .style('height', 0 + 'px')
-      .style('width', 0 + 'px')
-      .remove();
   }
 
-  drawLayout(layout: LayoutConfig, data: RxJsDataItem[]): void {
-    return this.holder
-      .selectAll('.' + this.selectors.item)
-      .data(data, d => d.id)
-      .transition(this.transition)
+  renderUpdateElems(holder, layout: LayoutConfig, data, bound): void {
+    const updateElems = holder
+      .data(data, d => d.id);
+
+    updateElems.transition(this.transition)
       .style('left', layout.left)
       .style('top', layout.top)
       .style('height', layout.height)
@@ -150,18 +170,22 @@ export class ItemViewComponent {
 
   }
 
-  drawContainer(layout: LayoutConfig, data: RxJsDataItem[]): void {
-
-    this.holder.transition(this.transition)
-      .style('height', layout.totalHeight(data));
+  renderExitElems(elems): void {
+    const exitElems = elems.exit();
+    exitElems
+      .transition(this.transition)
+      .style('height', 0 + 'px')
+      .style('width', 0 + 'px')
+      .remove();
   }
 
-  drawSortColor(key: string, data: RxJsDataItem[], colorMap: {}): void {
-    this.holder.classed(this.selectors.sorted, !!key);
-
-    this.holder.selectAll('.' + this.selectors.item)
-      .data(data, d => d.id)
-      .style('border-color', d => key ? colorMap[key][d[key]] : 'inherit');
+  renderSortColor(holder, key: string, boundDataElems, colorMap: {}): void {
+    holder.classed(this.selectors.sorted, !!key);
+    boundDataElems
+      .style('border-color', d => {
+        console.log(d.id, key ? colorMap[key][d[key]] : 'inherit');
+        return key ? colorMap[key][d[key]] : 'inherit';
+      });
   }
 
 }

@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { isNotUndefined, selectDistinctState } from '@ng-rx/shared/core';
-import { combineLatest, ReplaySubject } from 'rxjs';
+import { combineLatest, defer, ReplaySubject } from 'rxjs';
 import { auditTime, map, shareReplay, switchMap } from 'rxjs/operators';
 import { FilterConfig } from './filter-config.interface';
 import { FilterSelectionState } from './filter-selection-state.interface';
@@ -24,6 +24,15 @@ export class FilterSelectionComponent {
   @Input() set state(keys: FilterSelectionState) {
     this.stateSubject.next(keys);
   }
+
+  @Output() stateChanged = defer(() => this.formGroup$
+    .pipe(
+      switchMap(f => f.valueChanges),
+      auditTime(250),
+      map(this.selectedPropsMapToOutput)
+    )
+  );
+
 
   // Preparing input values
   filterConfig$ = this.stateSubject
@@ -48,14 +57,6 @@ export class FilterSelectionComponent {
       // and we want to have only one instance
       shareReplay(1)
     );
-
-  @Output() stateChanged = this.formGroup$
-    .pipe(
-      switchMap(f => f.valueChanges),
-      auditTime(250),
-      map(this.selectedPropsMapToOutput)
-    );
-
 
   constructor(private fb: FormBuilder) {
 

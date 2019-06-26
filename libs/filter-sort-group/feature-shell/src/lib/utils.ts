@@ -1,5 +1,6 @@
 import * as d3 from 'd3';
 import * as fastSort from 'fast-sort';
+import { Observable, Subject } from 'rxjs';
 import { FilterConfig } from './components/filter-selection/filter-config.interface';
 
 export function getColorMap(data) {
@@ -62,4 +63,22 @@ export function filter(data: any[], {value, selectedProps}: FilterConfig): any[]
     }, new Map())
 
   return Array.from(map.values());
+}
+
+
+export function observe<T>(obj, prop, subject = new Subject()): {[key: string]: Observable<T>, proxy: any} {
+  const handler: any = {
+    set(target: any, propKey: string | symbol, value: any) {
+      if(propKey === prop) {
+        subject.next(value);
+      }
+      target[propKey] = value;
+      return true;
+    }
+  };
+
+  return {
+    [prop]: subject.asObservable(),
+    proxy: new Proxy(obj, handler)
+  };
 }
