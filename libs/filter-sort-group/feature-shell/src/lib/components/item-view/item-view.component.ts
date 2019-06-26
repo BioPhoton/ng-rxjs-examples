@@ -183,7 +183,6 @@ export class ItemViewComponent implements AfterViewInit {
     holder.classed(this.selectors.sorted, !!key);
     boundDataElems
       .style('border-color', d => {
-        console.log(d.id, key ? colorMap[key][d[key]] : 'inherit');
         return key ? colorMap[key][d[key]] : 'inherit';
       });
   }

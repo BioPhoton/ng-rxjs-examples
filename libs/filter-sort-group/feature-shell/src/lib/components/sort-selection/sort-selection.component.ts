@@ -5,8 +5,12 @@ import {
   Output
 } from '@angular/core';
 import { isNotUndefined, selectDistinctState } from '@ng-rx/shared/core';
-import { ReplaySubject, Subject } from 'rxjs';
-import { map, shareReplay, withLatestFrom } from 'rxjs/operators';
+import { RxJsDataItem } from '@nx-v8/filter-sort-group/api-client';
+import { defer, Observable, ReplaySubject, Subject } from 'rxjs';
+import { map, withLatestFrom } from 'rxjs/operators';
+import { observe } from '../../utils';
+import { ItemViewState } from '../item-view/item-view-state.interface';
+import { LayoutSelectionState } from '../layout-selection/layout-selection-state.interface';
 import { SortConfig } from './sort-config.interface';
 import { SortSelectionState } from './sort-selection-state.interface';
 
@@ -18,20 +22,18 @@ import { SortSelectionState } from './sort-selection-state.interface';
 })
 export class SortSelectionComponent {
 
-  stateSubject = new ReplaySubject<SortSelectionState>(1);
+  @Input() state;
+  state$: Observable<SortSelectionState>;
 
-  @Input() set state(keys: SortSelectionState) {
-    this.stateSubject.next(keys);
-  }
-
-  sortConfig$ = this.stateSubject.pipe(
+  sortConfig$ = defer(() => this.state$.pipe(
     selectDistinctState('sortConfig'),
     isNotUndefined<SortConfig>()
+    )
   );
-  sortOptions$ = this.stateSubject.pipe(
+  sortOptions$ = defer(() => this.state$.pipe(
     selectDistinctState('sortOptions'),
     isNotUndefined<string[]>()
-  );
+  ));
   primarySortKey$ = this.sortConfig$.pipe(
     map(o => {
       const length = o ? Object.entries(o).length : 0;
@@ -47,6 +49,9 @@ export class SortSelectionComponent {
     );
 
   constructor() {
+    const { state, proxy } = observe<SortSelectionState>(this, 'state', new ReplaySubject<SortSelectionState>(1));
+    this.state$ = state;
+    return proxy;
   }
 
   mapToOutput(key, sortConfig): { [kex: string]: boolean } {

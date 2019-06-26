@@ -6,8 +6,10 @@ import {
 } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { isNotUndefined, selectDistinctState } from '@ng-rx/shared/core';
-import { combineLatest, defer, ReplaySubject } from 'rxjs';
+import { combineLatest, defer, Observable, ReplaySubject } from 'rxjs';
 import { auditTime, map, shareReplay, switchMap } from 'rxjs/operators';
+import { observe } from '../../utils';
+import { SortSelectionState } from '../sort-selection/sort-selection-state.interface';
 import { FilterConfig } from './filter-config.interface';
 import { FilterSelectionState } from './filter-selection-state.interface';
 
@@ -19,11 +21,8 @@ import { FilterSelectionState } from './filter-selection-state.interface';
 })
 export class FilterSelectionComponent {
 
-  stateSubject = new ReplaySubject<FilterSelectionState>(1);
-
-  @Input() set state(keys: FilterSelectionState) {
-    this.stateSubject.next(keys);
-  }
+  @Input() state;
+  state$: Observable<FilterSelectionState>;
 
   @Output() stateChanged = defer(() => this.formGroup$
     .pipe(
@@ -35,16 +34,19 @@ export class FilterSelectionComponent {
 
 
   // Preparing input values
-  filterConfig$ = this.stateSubject
+  filterConfig$ = defer(() => this.state$
     .pipe(
       selectDistinctState<FilterConfig>('filterConfig'),
       isNotUndefined<FilterConfig>()
-    );
-  filterOptions$ = this.stateSubject
+    )
+  );
+
+  filterOptions$ = defer(() => this.state$
     .pipe(
       selectDistinctState<string[]>('filterOptions'),
       isNotUndefined<string[]>()
-    );
+    )
+  );
 
   // Generating Form
   formGroup$ = combineLatest(this.filterOptions$, this.filterConfig$)
@@ -55,11 +57,14 @@ export class FilterSelectionComponent {
       }),
       // we need this because we have multiple subscribers
       // and we want to have only one instance
+      // @TODO why shareReplay and not share??
       shareReplay(1)
     );
 
   constructor(private fb: FormBuilder) {
-
+    const { state, proxy } = observe<FilterSelectionState>(this, 'state', new ReplaySubject<FilterSelectionState>(1));
+    this.state$ = state;
+    return proxy;
   }
 
   selectedPropsMapToInput(options: string[] = [], selectedProps: string[] = []) {
