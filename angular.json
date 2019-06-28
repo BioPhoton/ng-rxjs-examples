@@ -242,6 +242,33 @@
           "styleext": "scss"
         }
       }
+    },
+    "reactive-bindings-and-hooks-feature-shell": {
+      "projectType": "library",
+      "root": "libs/reactive-bindings-and-hooks/feature-shell",
+      "sourceRoot": "libs/reactive-bindings-and-hooks/feature-shell/src",
+      "prefix": "rbah",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/reactive-bindings-and-hooks/feature-shell/tsconfig.lib.json",
+              "libs/reactive-bindings-and-hooks/feature-shell/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/reactive-bindings-and-hooks/feature-shell/jest.config.js",
+            "tsConfig": "libs/reactive-bindings-and-hooks/feature-shell/tsconfig.spec.json",
+            "setupFile": "libs/reactive-bindings-and-hooks/feature-shell/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {}
     }
   },
   "cli": {

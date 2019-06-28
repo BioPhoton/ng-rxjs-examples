@@ -29,6 +29,11 @@ import { RouterModule } from '@angular/router';
           path: 'subjects',
           loadChildren:
             () => import('@ng-rx/subjects/feature-shell').then(m => m.SubjectsFeatureShellModule)
+        },
+        {
+          path: 'reactive-bindings',
+          loadChildren:
+            () => import('@ng-rx/reactive-bindings-and-hooks/feature-shell').then(m => m.SubjectsFeatureShellModule)
         }
       ],
       {

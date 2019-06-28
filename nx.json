@@ -46,6 +46,9 @@
     },
     "subjects-feature-shell": {
       "tags": ["type:library"]
+    },
+    "reactive-bindings-and-hooks-feature-shell": {
+      "tags": ["scope:feature"]
     }
   }
 }

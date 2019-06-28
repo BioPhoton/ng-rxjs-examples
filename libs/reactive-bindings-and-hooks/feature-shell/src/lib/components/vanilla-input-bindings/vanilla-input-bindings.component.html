@@ -1,0 +1,5 @@
+<div>
+  <input type="text" [ngModel]="value"/>
+  value: {{value}}
+</div>
+<button (click)="valueChange.emit()">trigger event</button>
