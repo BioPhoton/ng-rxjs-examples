@@ -1,0 +1,9 @@
+<h1>Subject output bindings container</h1>
+<p>SubjectOutputState:</p>
+<pre>
+  {{subjectOutputState | json}}
+</pre>
+<rbah-subject-output-bindings
+  [singleSelectionState]="subjectOutputState"
+  (stateChange)="onStateChange($event)">
+</rbah-subject-output-bindings>

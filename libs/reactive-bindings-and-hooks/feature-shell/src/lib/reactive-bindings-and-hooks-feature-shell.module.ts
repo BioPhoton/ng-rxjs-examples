@@ -1,12 +1,18 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { BindingExamplesComponent } from './binding-examples/binding-examples.component';
+import { FormsOutputBindingsComponent } from './binding-examples/components/forms-output-bindings/forms-output-bindings.component';
+import { ProxyInputBindingsComponent } from './binding-examples/components/proxy-input-bindings/proxy-input-bindings.component';
+import { SubjectHookComponent } from './binding-examples/components/subject-hook/subject-hook.component';
+import { SubjectOutputBindingsComponent } from './binding-examples/components/subject-output-bindings/subject-output-bindings.component';
 import { VanillaInputBindingsComponent } from './binding-examples/components/vanilla-input-bindings/vanilla-input-bindings.component';
-import { VanillaInputBindingsContainerComponent } from './binding-examples/containers/vanilla-input-bindings-container/vanilla-input-bindings-container.component';
+import { FormsOutputBindingsContainerComponent } from './binding-examples/containers/forms-output-bindings-container/forms-output-bindings-container.component';
 import { ProxyInputBindingsContainerComponent } from './binding-examples/containers/proxy-input-bindings-container/proxy-input-bindings-container.component';
-import { ProxyInputBindingsComponentComponent } from './binding-examples/components/proxy-input-bindings/proxy-input-bindings-component.component';
+import { SubjectHookContainerComponent } from './binding-examples/containers/subject-hook-container/subject-hook-container.component';
+import { SubjectOutputBindingsContainerComponent } from './binding-examples/containers/subject-output-bindings-container/subject-output-bindings-container.component';
+import { VanillaInputBindingsContainerComponent } from './binding-examples/containers/vanilla-input-bindings-container/vanilla-input-bindings-container.component';
 
 export const FEATURE_ROUTES: Routes = [
   { path: '', redirectTo: 'examples', pathMatch: 'full' },
@@ -17,27 +23,27 @@ export const FEATURE_ROUTES: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'vanilla-input-bindings-container'
+        redirectTo: 'vanilla-input-bindings'
       },
       {
-        path: 'vanilla-input-bindings-container',
+        path: 'vanilla-input-bindings',
         component: VanillaInputBindingsContainerComponent
       },
       {
-        path: 'proxy-input-bindings-container',
+        path: 'proxy-input-bindings',
         component: ProxyInputBindingsContainerComponent
       },
       {
-        path: 'vanilla-output-bindings',
-        component: VanillaInputBindingsComponent
+        path: 'subject-output-bindings',
+        component: SubjectOutputBindingsContainerComponent
       },
       {
-        path: 'vanilla-output-bindings-forms',
-        component: VanillaInputBindingsComponent
+        path: 'forms-output-bindings',
+        component: FormsOutputBindingsContainerComponent
       },
       {
-        path: 'vanilla-output-bindings-observables',
-        component: VanillaInputBindingsComponent
+        path: 'subject-hooks',
+        component: SubjectHookContainerComponent
       }
     ]
   }
@@ -46,10 +52,22 @@ export const FEATURE_ROUTES: Routes = [
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forChild(FEATURE_ROUTES)
   ],
-  declarations: [BindingExamplesComponent, VanillaInputBindingsComponent, VanillaInputBindingsContainerComponent, ProxyInputBindingsContainerComponent, ProxyInputBindingsComponentComponent]
+  declarations: [
+    BindingExamplesComponent,
+    VanillaInputBindingsContainerComponent,
+    VanillaInputBindingsComponent,
+    ProxyInputBindingsContainerComponent,
+    ProxyInputBindingsComponent,
+    SubjectOutputBindingsContainerComponent,
+    SubjectOutputBindingsComponent,
+    FormsOutputBindingsContainerComponent,
+    FormsOutputBindingsComponent,
+    SubjectHookContainerComponent,
+    SubjectHookComponent
+  ]
 })
 export class ReactiveBindingsAndHooksFeatureShellModule {
 }

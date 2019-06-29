@@ -10,13 +10,13 @@ import { distinctUntilChanged, map, shareReplay, tap } from 'rxjs/operators';
 import { SingleSelectionState } from '../../../interfaces/single-selection-state';
 
 @Component({
-  selector: 'vanilla-input-bindings',
+  selector: 'rbah-vanilla-input-bindings',
   templateUrl: './vanilla-input-bindings.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VanillaInputBindingsComponent {
 
-  singleSelectionStateSubject = new ReplaySubject<SingleSelectionState>();
+  singleSelectionStateSubject = new ReplaySubject<SingleSelectionState>(1);
   @Input()
   set singleSelectionState (singleSelectionState) {
     this.singleSelectionStateSubject.next(singleSelectionState)

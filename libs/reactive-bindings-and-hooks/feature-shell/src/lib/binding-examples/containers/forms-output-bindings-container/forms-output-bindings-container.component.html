@@ -1,0 +1,9 @@
+<h1>Forms-output-bindings-container</h1>
+<p>FormsOutputState:</p>
+<pre>
+  {{formsOutputState | json}}
+</pre>
+<rbah-forms-output-bindings
+  [singleSelectionState]="formsOutputState"
+  (stateChange)="onStateChange($event)">
+</rbah-forms-output-bindings>

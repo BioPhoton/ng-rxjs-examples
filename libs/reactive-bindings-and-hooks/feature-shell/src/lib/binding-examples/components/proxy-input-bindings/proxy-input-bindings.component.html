@@ -1,0 +1,11 @@
+<h2>Proxy input binding component</h2>
+<div>
+  <label>State: {{state$ | async}}</label>
+  <br>
+  <button
+    type="button"
+    *ngFor="let option of config$ | async"
+    (click)="stateChange.emit(option)">
+    {{option}}
+  </button>
+</div>

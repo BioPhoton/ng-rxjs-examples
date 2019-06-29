@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { SingleSelectionState } from '../../../interfaces/single-selection-state';
 
 @Component({
-  selector: 'examples',
+  selector: 'rbah-vanilla-input-bindings-container',
   templateUrl: './vanilla-input-bindings-container.component.html'
 })
 export class VanillaInputBindingsContainerComponent {

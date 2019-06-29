@@ -1,14 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { SingleSelectionState } from '../../../interfaces/single-selection-state';
 
 @Component({
-  selector: 'examples',
+  selector: 'rbah-proxy-input-bindings-container',
   templateUrl: './proxy-input-bindings-container.component.html'
 })
-export class ProxyInputBindingsContainerComponent implements OnInit {
+export class ProxyInputBindingsContainerComponent {
+  proxyInputState: SingleSelectionState = {
+    state: 'option1',
+    config: ['option1', 'option2', 'option3']
+  };
 
   constructor() { }
 
-  ngOnInit() {
+  onStateChange(state) {
+    this.proxyInputState = {
+      ...this.proxyInputState,
+      state
+    };
   }
 
 }
