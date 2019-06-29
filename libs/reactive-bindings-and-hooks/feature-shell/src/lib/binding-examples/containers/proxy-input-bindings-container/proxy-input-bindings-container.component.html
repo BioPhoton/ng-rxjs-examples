@@ -1,0 +1,9 @@
+<h1>Proxy-input-bindings-container</h1>
+<p>ProxyInputState:</p>
+<pre>
+  {{proxyInputState | json}}
+</pre>
+<proxy-input-bindings
+  [singleSelectionState]="proxyInputState"
+  (stateChange)="onStateChange($event)">
+</proxy-input-bindings>

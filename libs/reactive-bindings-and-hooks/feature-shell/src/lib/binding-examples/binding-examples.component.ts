@@ -2,14 +2,10 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'examples',
-  templateUrl: './binding-examples.component.html',
-  styleUrls: ['./binding-examples.component.scss']
+  templateUrl: './binding-examples.component.html'
 })
-export class BindingExamplesComponent implements OnInit {
+export class BindingExamplesComponent {
 
   constructor() { }
-
-  ngOnInit() {
-  }
 
 }

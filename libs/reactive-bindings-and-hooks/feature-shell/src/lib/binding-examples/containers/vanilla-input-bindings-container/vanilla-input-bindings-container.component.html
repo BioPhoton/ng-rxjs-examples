@@ -1,0 +1,9 @@
+<h1>Vanilla-input-bindings-container</h1>
+<p>VanillaInputState:</p>
+<pre>
+  {{vanillaInputState | json}}
+</pre>
+<vanilla-input-bindings
+  [singleSelectionState]="vanillaInputState"
+  (stateChange)="onStateChange($event)">
+</vanilla-input-bindings>
