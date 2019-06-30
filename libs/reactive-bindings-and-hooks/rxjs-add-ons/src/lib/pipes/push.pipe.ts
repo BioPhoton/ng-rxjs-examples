@@ -65,7 +65,7 @@ export class PushPipe implements PipeTransform, OnDestroy {
   transform<T>(obs: undefined, onPush?: boolean): null;
   transform<T>(obs: Observable<T> | null | undefined, onPush?: boolean): T | null;
   transform(obs: Observable<any> | null | undefined, onPush?: boolean): any {
-    onPush = !!onPush;
+    onPush = onPush === undefined ? true : !!onPush;
 
     if (!isObservable(obs)) {
       this._currentObs = EMPTY;
