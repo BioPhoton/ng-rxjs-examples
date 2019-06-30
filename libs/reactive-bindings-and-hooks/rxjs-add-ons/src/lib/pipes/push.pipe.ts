@@ -37,11 +37,14 @@ export class PushPipe implements PipeTransform, OnDestroy {
   observablesToSubscribe$ = new Subject<Observable<any>>();
 
   handleChangesSideEffect$ = this.observablesToSubscribe$.pipe(
+    // trigger change detection for new observables
+    detectChanges(this._cdRef),
     // unsubscribe from previous observables
+    // then and flatten all internal observables
     switchAll(),
     // assign value
     tap(v => this.value = v),
-    // trigger change detection
+    // trigger change detection for distinct values
     detectChanges(this._cdRef),
     takeUntil(this.ngOnDestroy$)
   );
