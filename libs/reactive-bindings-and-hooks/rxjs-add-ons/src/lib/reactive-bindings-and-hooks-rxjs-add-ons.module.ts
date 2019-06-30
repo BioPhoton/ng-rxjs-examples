@@ -7,4 +7,4 @@ import { PushPipe } from './pipes/push.pipe';
   declarations: [PushPipe],
   exports: [PushPipe]
 })
-export class ReactiveBindingsAndHooksRxjsAddOnsModule {}
+export class RxJSAddOnsModule {}

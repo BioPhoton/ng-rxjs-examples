@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
+import { RxJSAddOnsModule } from '@nx-v8/reactive-bindings-and-hooks/rxjs-add-ons';
 import { BindingExamplesComponent } from './binding-examples/binding-examples.component';
 import { FormsOutputBindingsComponent } from './binding-examples/components/forms-output-bindings/forms-output-bindings.component';
 import { ProxyInputBindingsComponent } from './binding-examples/components/proxy-input-bindings/proxy-input-bindings.component';
@@ -65,6 +66,7 @@ export const FEATURE_ROUTES: Routes = [
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    RxJSAddOnsModule,
     RouterModule.forChild(FEATURE_ROUTES)
   ],
   declarations: [

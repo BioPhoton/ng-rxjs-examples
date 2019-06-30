@@ -5,7 +5,7 @@ import {
   Pipe,
   PipeTransform
 } from '@angular/core';
-import { detectChanges } from '@nx-v8/reactive-bindings-and-hooks/rxjs-add-ons';
+import { detectChanges } from '../rxjs/operators/detectChanges';
 import { EMPTY, isObservable, Observable, Subject } from 'rxjs';
 import {
   distinctUntilChanged,
@@ -58,10 +58,12 @@ export class PushPipe implements PipeTransform, OnDestroy {
     this.ngOnDestroy$.next(true);
   }
 
-  transform<T>(obs: null, onPush = true): null;
-  transform<T>(obs: undefined, onPush = true): undefined;
-  transform<T>(obs: Observable<T> | null | undefined, onPush = true): T | null;
-  transform(obs: Observable<any> | null | undefined, onPush = true): any {
+  transform<T>(obs: null, onPush: boolean): null;
+  transform<T>(obs: undefined, onPush?: boolean): null;
+  transform<T>(obs: Observable<T> | null | undefined, onPush?: boolean): T | null;
+  transform(obs: Observable<any> | null | undefined, onPush?: boolean): any {
+    onPush = !!onPush;
+
     if (!isObservable(obs)) {
       this._currentObs = EMPTY;
       this.observablesToSubscribe$.next(EMPTY);
