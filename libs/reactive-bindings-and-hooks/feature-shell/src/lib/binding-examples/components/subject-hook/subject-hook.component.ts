@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnDestroy
+} from '@angular/core';
 import { interval, merge, Subject } from 'rxjs';
 import { takeUntil, tap } from 'rxjs/operators';
 
@@ -19,13 +24,12 @@ export class SubjectHookComponent implements OnDestroy {
       tap(console.log)
     );
 
-  constructor() {
-    merge(
+  constructor( private cdr : ChangeDetectorRef) {
       this.tick$.pipe(
-        tap(nextTick => this.currentTick = nextTick)
-      )
-    )
-      .pipe(
+        tap(nextTick => {
+          this.currentTick = nextTick;
+          cdr.markForCheck();
+        }),
         takeUntil(this.onDestroy$)
       )
       .subscribe();

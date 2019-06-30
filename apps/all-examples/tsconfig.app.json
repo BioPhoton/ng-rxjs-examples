@@ -4,6 +4,9 @@
     "outDir": "../../dist/out-tsc",
     "types": []
   },
+  "angularCompilerOptions": {
+    "enableIvy": true
+  },
   "include": [
     "**/*.ts",
     "../../libs/polling/feature-shell/src/index.ts",

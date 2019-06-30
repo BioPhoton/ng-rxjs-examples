@@ -49,6 +49,9 @@
     },
     "reactive-bindings-and-hooks-feature-shell": {
       "tags": ["scope:feature"]
+    },
+    "reactive-bindings-and-hooks-rxjs-add-ons": {
+      "tags": []
     }
   }
 }

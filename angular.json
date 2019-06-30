@@ -27,7 +27,8 @@
               "apps/all-examples/src/assets"
             ],
             "styles": ["apps/all-examples/src/styles.scss"],
-            "scripts": []
+            "scripts": [],
+            "aot": true
           },
           "configurations": {
             "production": {
@@ -269,6 +270,44 @@
         }
       },
       "schematics": {}
+    },
+    "reactive-bindings-and-hooks-rxjs-add-ons": {
+      "projectType": "library",
+      "root": "libs/reactive-bindings-and-hooks/rxjs-add-ons",
+      "sourceRoot": "libs/reactive-bindings-and-hooks/rxjs-add-ons/src",
+      "prefix": "nx-v8",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/reactive-bindings-and-hooks/rxjs-add-ons/tsconfig.lib.json",
+            "project": "libs/reactive-bindings-and-hooks/rxjs-add-ons/ng-package.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/reactive-bindings-and-hooks/rxjs-add-ons/tsconfig.lib.json",
+              "libs/reactive-bindings-and-hooks/rxjs-add-ons/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/reactive-bindings-and-hooks/rxjs-add-ons/src/test.ts",
+            "tsConfig": "libs/reactive-bindings-and-hooks/rxjs-add-ons/tsconfig.spec.json",
+            "karmaConfig": "libs/reactive-bindings-and-hooks/rxjs-add-ons/karma.conf.js"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
     }
   },
   "cli": {

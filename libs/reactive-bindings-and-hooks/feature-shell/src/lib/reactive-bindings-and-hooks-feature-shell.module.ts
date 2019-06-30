@@ -13,6 +13,10 @@ import { ProxyInputBindingsContainerComponent } from './binding-examples/contain
 import { SubjectHookContainerComponent } from './binding-examples/containers/subject-hook-container/subject-hook-container.component';
 import { SubjectOutputBindingsContainerComponent } from './binding-examples/containers/subject-output-bindings-container/subject-output-bindings-container.component';
 import { VanillaInputBindingsContainerComponent } from './binding-examples/containers/vanilla-input-bindings-container/vanilla-input-bindings-container.component';
+import { IvyLifeCycleDecoratorsHookComponent } from './binding-examples/components/ivy-life-cycle-decorators-hook/ivy-life-cycle-decorators-hook.component';
+import { IvyLifeCycleDecoratorsHookContainerComponent } from './binding-examples/containers/ivy-life-cycle-decorators-hook-container/ivy-life-cycle-decorators-hook-container.component';
+import { PushPipeContainerComponent } from './binding-examples/containers/push-pipe-container/push-pipe-container.component';
+import { PushPipeComponent } from './binding-examples/components/push-pipe/push-pipe.component';
 
 export const FEATURE_ROUTES: Routes = [
   { path: '', redirectTo: 'examples', pathMatch: 'full' },
@@ -44,6 +48,14 @@ export const FEATURE_ROUTES: Routes = [
       {
         path: 'subject-hooks',
         component: SubjectHookContainerComponent
+      },
+      {
+        path: 'push-pipe',
+        component: PushPipeContainerComponent
+      },
+      {
+        path: 'ivy-life-cycle-hooks',
+        component: IvyLifeCycleDecoratorsHookContainerComponent
       }
     ]
   }
@@ -66,7 +78,11 @@ export const FEATURE_ROUTES: Routes = [
     FormsOutputBindingsContainerComponent,
     FormsOutputBindingsComponent,
     SubjectHookContainerComponent,
-    SubjectHookComponent
+    SubjectHookComponent,
+    IvyLifeCycleDecoratorsHookComponent,
+    IvyLifeCycleDecoratorsHookContainerComponent,
+    PushPipeContainerComponent,
+    PushPipeComponent
   ]
 })
 export class ReactiveBindingsAndHooksFeatureShellModule {
