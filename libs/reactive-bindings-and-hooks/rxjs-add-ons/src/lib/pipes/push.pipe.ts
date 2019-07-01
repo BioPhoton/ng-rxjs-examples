@@ -37,6 +37,8 @@ export class PushPipe implements PipeTransform, OnDestroy {
   observablesToSubscribe$ = new Subject<Observable<any>>();
 
   handleChangesSideEffect$ = this.observablesToSubscribe$.pipe(
+    // only forward new references (avoids holding a local reference to the previous observable => this._currentObs !== obs)
+    distinctUntilChanged(),
     // trigger change detection for new observables
     detectChanges(this._cdRef),
     // unsubscribe from previous observables
@@ -64,7 +66,7 @@ export class PushPipe implements PipeTransform, OnDestroy {
   transform<T>(obs: null, onPush: boolean): null;
   transform<T>(obs: undefined, onPush?: boolean): null;
   transform<T>(obs: Observable<T> | null | undefined, onPush?: boolean): T | null;
-  transform(obs: Observable<any> | null | undefined, onPush?: boolean): any {
+  transform(obs: Observable<any> | null | undefined, onPush: boolean): any {
     onPush = onPush === undefined ? true : !!onPush;
 
     if (!isObservable(obs)) {
@@ -72,14 +74,10 @@ export class PushPipe implements PipeTransform, OnDestroy {
       this.observablesToSubscribe$.next(EMPTY);
       this.value = null;
     } else {
-      if (this._currentObs !== obs) {
-        this._currentObs = obs;
         // if onPush === true then check if value is referentially equal to previous
         const distinctObs = onPush ? obs.pipe(distinctUntilChanged()) : obs;
         this.observablesToSubscribe$.next(distinctObs);
-      }
     }
-
     return this.value;
   }
 }

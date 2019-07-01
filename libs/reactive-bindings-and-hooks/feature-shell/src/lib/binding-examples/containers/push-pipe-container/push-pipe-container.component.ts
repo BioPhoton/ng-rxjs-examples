@@ -9,17 +9,14 @@ import { map } from 'rxjs/operators';
       <!--  
       async-pipe: {{primitiveInterval$ | async}}<br>
       primitiveInterval$ | push: {{primitiveInterval$ | push}}<br>
+      mutuableInterval$ | push: {{(mutuableInterval$ | push:false)?.value}}<br>
+      immutableInterval$ | push: {{(immutableInterval$ | push)?.value}}<br>
      
     -->
-      mutuableInterval$ | push: {{(mutuableInterval$ | push:false)?.value}}<br>
-
-      <!--
-
-
-      immutableInterval$ | push: {{(immutableInterval$ | push)?.value}}<br>
 
       <rbah-push-pipe [value]="immutableInterval$ | push">
       </rbah-push-pipe>
+      <!--
                  
             
       -->
