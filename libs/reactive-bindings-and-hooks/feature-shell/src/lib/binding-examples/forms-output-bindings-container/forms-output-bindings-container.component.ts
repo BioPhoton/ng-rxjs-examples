@@ -1,5 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { SingleSelectionState } from '../../../interfaces/single-selection-state';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { SingleSelectionState } from '../../interfaces/single-selection-state';
 
 @Component({
   selector: 'rbah-forms-output-bindings-container',
@@ -13,7 +13,8 @@ export class FormsOutputBindingsContainerComponent {
     config: ['option1', 'option2', 'option3']
   };
 
-  constructor() { }
+  constructor() {
+  }
 
   onStateChange(state) {
     console.log('state', state);

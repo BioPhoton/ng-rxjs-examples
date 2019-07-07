@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SingleSelectionState } from '../../../interfaces/single-selection-state';
+import { SingleSelectionState } from '../../interfaces/single-selection-state';
 
 @Component({
   selector: 'rbah-proxy-input-bindings-container',
@@ -11,7 +11,8 @@ export class ProxyInputBindingsContainerComponent {
     config: ['option1', 'option2', 'option3']
   };
 
-  constructor() { }
+  constructor() {
+  }
 
   onStateChange(state) {
     this.proxyInputState = {

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SingleSelectionState } from '../../../interfaces/single-selection-state';
+import { SingleSelectionState } from '../../interfaces/single-selection-state';
 
 @Component({
   selector: 'rbah-vanilla-input-bindings-container',

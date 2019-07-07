@@ -1,5 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { SingleSelectionState } from '../../../interfaces/single-selection-state';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { SingleSelectionState } from '../../interfaces/single-selection-state';
 
 @Component({
   selector: 'rbah-subject-output-bindings-container',
@@ -12,7 +12,8 @@ export class SubjectOutputBindingsContainerComponent {
     config: ['option1', 'option2', 'option3']
   };
 
-  constructor() { }
+  constructor() {
+  }
 
   onStateChange(state) {
     this.subjectOutputState = {

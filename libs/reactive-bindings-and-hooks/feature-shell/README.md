@@ -1,7 +1,10 @@
 # reactive-bindings-and-hooks-feature-shell
 
-This library was generated with [Nx](https://nx.dev).
+This library includes all sort of reactive tricks 
+when working with angular.
 
-## Running unit tests
-
-Run `ng test reactive-bindings-and-hooks-feature-shell` to execute the unit tests.
+Possible things are:
+- Reactive input bindings
+- Reactive host bindings
+- Reactive lifecycle hooks
+- Push pipe

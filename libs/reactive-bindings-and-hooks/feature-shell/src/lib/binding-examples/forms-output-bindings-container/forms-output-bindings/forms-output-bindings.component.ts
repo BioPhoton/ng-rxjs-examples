@@ -1,17 +1,16 @@
 import {
-  Component,
-  OnInit,
   ChangeDetectionStrategy,
-  Input, Output, EventEmitter
+  Component,
+  Input,
+  Output
 } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { defer, Observable, ReplaySubject } from 'rxjs';
+import { Observable, ReplaySubject } from 'rxjs';
 import {
   distinctUntilChanged,
   map,
-  share, shareReplay,
-  switchMap,
-  tap
+  shareReplay,
+  switchMap
 } from 'rxjs/operators';
 import { SingleSelectionState } from '../../../interfaces/single-selection-state';
 
