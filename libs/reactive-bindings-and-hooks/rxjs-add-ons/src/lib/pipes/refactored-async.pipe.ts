@@ -72,23 +72,14 @@ export class AsyncPipe implements OnDestroy, PipeTransform {
 
         throw invalidPipeArgumentError(AsyncPipe, obj);
       }),
-      // only forward new references (avoids holding a local reference to the previous observable => this.currentObs !== obs)
       distinctUntilChanged(),
-      // trigger change detection for new observables bound in the template
       tap(_ => this._ref.markForCheck())
     );
 
   handlePipedValues$ = this.pipedValue$
     .pipe(
-      // unsubscribe from previous observables
-      // then flatten the latest internal observables into the output
       switchAll(),
-
-      // JS has NaN !== NaN
       distinctUntilChanged(ɵlooseIdentical),
-
-      // assign value that will get returned from the transform function on the next change detection
-      // trigger change detection for the to get the newly assigned value rendered
       tap((value) => {
         this._latestValue = value;
         this._ref.markForCheck();
