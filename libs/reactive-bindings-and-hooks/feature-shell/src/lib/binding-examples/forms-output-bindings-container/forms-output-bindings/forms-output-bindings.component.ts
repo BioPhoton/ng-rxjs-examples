@@ -16,7 +16,28 @@ import { SingleSelectionState } from '../../../interfaces/single-selection-state
 
 @Component({
   selector: 'rbah-forms-output-bindings',
-  templateUrl: './forms-output-bindings.component.html',
+  template: `
+    <h2>Forms output binding component</h2>
+    <div>
+      <form
+        *ngIf="(formGroup$ | async) as form"
+        [formGroup]="form">
+        <label>State: {{state$ | async}}</label>
+        <br/>
+        <label [for]="option"
+          *ngFor="let option of config$ | async">
+          {{option}}
+          <input
+            [id]="option"
+            type="radio"
+            formControlName="state"
+            [value]="option"
+          >
+        </label>
+
+      </form>
+    </div>
+  `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FormsOutputBindingsComponent {
