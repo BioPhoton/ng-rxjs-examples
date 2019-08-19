@@ -70,9 +70,27 @@ export const getLayouts = () => {
     };
   };
 
+
+  const getTableLayout = (): LayoutConfig => {
+
+    const itemHeight = 22;
+    const itemWidth = 100;
+    const margin = 0;
+
+    return {
+      name: (d, i) => 'table',
+      top: (d, i) => i * itemHeight + 'px',
+      left: (d, i) => 0 + 'px',
+      height: (d, i) => itemHeight + 'px',
+      width: (d, i) => itemWidth + '%',
+      totalHeight: (data) => (margin * 2 + data.length * itemHeight) + 'px'
+    };
+  };
+
   return {
     original: getOriginalLayout(),
     card: getCardLayout(),
-    diagram: getDiagramLayout()
+    diagram: getDiagramLayout(),
+    table: getTableLayout()
   };
 };

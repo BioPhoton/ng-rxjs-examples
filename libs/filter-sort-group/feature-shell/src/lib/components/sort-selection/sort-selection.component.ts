@@ -5,12 +5,9 @@ import {
   Output
 } from '@angular/core';
 import { isNotUndefined, selectDistinctState } from '@ng-rx/shared/core';
-import { RxJsDataItem } from '@nx-v8/filter-sort-group/api-client';
 import { defer, Observable, ReplaySubject, Subject } from 'rxjs';
 import { map, withLatestFrom } from 'rxjs/operators';
 import { observe } from '../../utils';
-import { ItemViewState } from '../item-view/item-view-state.interface';
-import { LayoutSelectionState } from '../layout-selection/layout-selection-state.interface';
 import { SortConfig } from './sort-config.interface';
 import { SortSelectionState } from './sort-selection-state.interface';
 
@@ -57,7 +54,6 @@ export class SortSelectionComponent {
   mapToOutput(key, sortConfig): { [kex: string]: boolean } {
     // the keys state traverse 3 states in following order:
     // not present in the array, true, false
-    // on every call the key
 
     if (!(key in sortConfig)) {
       return { ...sortConfig, [key]: true };

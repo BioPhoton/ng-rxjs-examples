@@ -45,8 +45,8 @@ export function sort(sorting, data: any[]): any[] {
   return sortConfig.length ? fastSort([...data]).by(sortConfig) : data;
 }
 
-export function filter(data: any[], {value, selectedProps}: FilterConfig): any[] {
-
+export function filter(data: any[], filterConfig: FilterConfig): any[] {
+  const {value, selectedProps} =  filterConfig || {} as FilterConfig;
   if(!selectedProps || value === undefined || value === null || value === ''  ) {
     return data
   }
@@ -80,5 +80,5 @@ export function observe<T>(obj, prop, subject = new Subject()): {[key: string]: 
   return {
     [prop]: subject.asObservable(),
     proxy: new Proxy(obj, handler)
-  };
+  } as {[key: string]: Observable<T>, proxy: any};
 }

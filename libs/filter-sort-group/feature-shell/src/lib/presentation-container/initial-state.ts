@@ -4,9 +4,11 @@ import { RxJsExplorerState } from './rxjs-explorer-state.interface';
 
 export const initRxJsExplorerState : RxJsExplorerState = {
   data: [] as RxJsDataItem[],
-  layoutConfig: getLayouts().original,
+  queryParams: {},
+  layoutOptions: getLayouts(),
   colorMap: {},
   sortConfig: {},
+  filterOptions: ['name', 'michael', 'cedric', 'oldSchool'],
   filterConfig: {
     value: '',
     selectedProps: ['name']

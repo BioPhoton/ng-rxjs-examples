@@ -5,8 +5,10 @@ import { SortConfig } from '../components/sort-selection/sort-config.interface';
 
 export interface RxJsExplorerState {
   data?: RxJsDataItem[];
-  layoutConfig?: LayoutConfig,
+  queryParams: {[key:string]: any},
+  layoutOptions?: {[key:string]: LayoutConfig}
   colorMap?: { [key: string]: { [key: string]: string } },
   sortConfig?: SortConfig,
-  filterConfig?: FilterConfig
+  filterConfig?: FilterConfig,
+  filterOptions?: string[]
 }

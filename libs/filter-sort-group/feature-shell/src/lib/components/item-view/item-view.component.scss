@@ -3,9 +3,9 @@
   font-family: Roboto,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
 
 
-  // = LAYOUTS
+  // = LAYOUTS =================================================================
 
-  // == DEFAULT LAYOUT
+  // == DEFAULT LAYOUT =========================================================
 
   .default {
     // =======
@@ -32,7 +32,8 @@
     .michael {
     }
   }
-  // == ORIGINAL LAYOUT
+
+  // == ORIGINAL LAYOUT ========================================================
   &.default,
   &.original {
     width: 100%;
@@ -123,7 +124,7 @@
 
   }
 
-  // == CARD LAYOUT
+  // == CARD LAYOUT ============================================================
   &.card {
     position: relative;
     width: 100%;
@@ -156,4 +157,51 @@
     }
   }
 
+}
+
+// == TABLE LAYOUT
+
+.table {
+  display: flex;
+
+  .item {
+    position: absolute;
+  }
+
+  // =======
+  //.name,
+  //.isOperator,
+  //.isDeprecated,
+  //.cedric,
+  //.oldSchool,
+  .michael {
+    display: none;
+  }
+
+  .name,
+  .isOperator,
+  .isDeprecated,
+  .cedric,
+  .oldSchool,
+  .michael {
+    height: 22px;
+    line-height: 22px;
+    float: left;
+    width: 120px;
+  }
+
+  // =======
+  .name {
+
+  }
+  .isOperator {
+  }
+  .isDeprecated {
+  }
+  .cedric {
+  }
+  .oldSchool {
+  }
+  .michael {
+  }
 }

@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { combineLatest, of } from 'rxjs';
 import { map, shareReplay, tap } from 'rxjs/operators';
@@ -10,7 +11,10 @@ import { PresentationFacade } from './presentation-facade.service';
   selector: 'presentation-container',
   templateUrl: './presentation-container.component.html',
   styleUrls: ['./presentation-container.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    PresentationFacade
+  ]
 })
 export class PresentationContainerComponent {
 
@@ -18,9 +22,6 @@ export class PresentationContainerComponent {
   command$ = this.facade.command$;
 
   // QUERIES
-  sortOptions$ = this.facade.data$.pipe(map(a => Object.keys(a[0])));
-  colorMap$ = this.facade.data$.pipe(map(getColorMap));
-  layoutOptions$ = of(getLayouts()).pipe(shareReplay(1));
 
   // INTERMEDIATE
   selectedData$ = combineLatest(
@@ -40,17 +41,17 @@ export class PresentationContainerComponent {
     );
 
   // OUTPUT
-  sortSelectionState$ = combineLatest(this.facade.sortConfig$, this.sortOptions$)
+  sortSelectionState$ = combineLatest(this.facade.sortConfig$, this.facade.sortOptions$)
     .pipe(
       map(([sortConfig, sortOptions]) => ({ sortConfig, sortOptions }))
     );
 
-  layoutSelectionState$ = combineLatest(this.facade.layoutConfig$, this.layoutOptions$)
+  layoutSelectionState$ = combineLatest(this.facade.layoutConfig$, this.facade.layoutOptions$)
     .pipe(
       map(([layoutConfig, layoutOptions]) => ({ layoutConfig, layoutOptions }))
     );
 
-  filterSelectionState$ = combineLatest(this.facade.filterConfig$, of(['name', 'michael', 'cedric', 'oldSchool']))
+  filterSelectionState$ = combineLatest(this.facade.filterConfig$, this.facade.filterOptions$)
     .pipe(
       map(([filterConfig, filterOptions]) => ({ filterConfig, filterOptions }))
     );
@@ -59,7 +60,7 @@ export class PresentationContainerComponent {
     this.facade.layoutConfig$,
     this.selectedData$,
     this.facade.sortConfig$,
-    this.colorMap$)
+    this.facade.colorMap$)
     .pipe(
       map(
         ([layoutConfig, data, sortConfig, colorMap]) =>
@@ -67,7 +68,9 @@ export class PresentationContainerComponent {
       )
     );
 
-  constructor(private facade: PresentationFacade) {
+  constructor(private facade: PresentationFacade,
+              private route: ActivatedRoute,
+              private router: Router) {
   }
 
 }
